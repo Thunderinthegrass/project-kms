@@ -2,9 +2,9 @@ import React from "react";
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
-const MyPosts = () => {
+const MyPosts = (props) => {
   return (
-    <div className="posts-wrapper">
+    <div className={s.postsWrapper}>
       <div className="new-post">
         <textarea name="" id="">
 
@@ -12,9 +12,9 @@ const MyPosts = () => {
         <button>Добавить пост</button>
       </div>
       <div className="posts">
-        <Post />
-        <Post />
-        <Post />
+        <Post name="Александр" />
+        <Post name="Федор" />
+        <Post name="Селиван" />
       </div>
     </div>
   );
