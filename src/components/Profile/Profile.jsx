@@ -2,9 +2,9 @@ import React from "react";
 import s from "./Profile.module.css";
 import MyPosts from "./MyPosts/MyPosts";
 
-const Profile = () => {
+const Profile = (props) => {
   return (
-    <div className={s.content}>
+    <div>
       <div className={s.banner}>
         {/* <img className="banner-img" src="https://zastavok.net/main/priroda/1473870210.jpg" alt="" /> */}
         <img

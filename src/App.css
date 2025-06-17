@@ -8,3 +8,7 @@
   grid-template-columns: 2fr 10fr;
   gap: 10px;
 }
+.content{
+  grid-area: cnt;
+  background: #af162a;
+}
