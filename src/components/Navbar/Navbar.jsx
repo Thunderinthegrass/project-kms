@@ -3,8 +3,7 @@ import s from './Navbar.module.css';
 import { NavLink } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
-const Navbar = () => {
-  console.log(s)
+const Navbar = (props) => {
   return (
     <nav className={s.nav}>
       <ul className={s.list}>
@@ -14,12 +13,15 @@ const Navbar = () => {
         <li>
           <NavLink className={ ({isActive}) => isActive ? s.active : s.item } to="/Dialogs">Messages</NavLink>
         </li>
-        {/* <li>
-          <a href="/Dialogs">Dialogs</a>
+        <li>
+          <NavLink className={ ({isActive}) => isActive ? s.active : s.item } to="/News">News</NavLink>
         </li>
         <li>
-          <a href="/">Profile</a>
-        </li> */}
+          <NavLink className={ ({isActive}) => isActive ? s.active : s.item } to="/Music">Music</NavLink>
+        </li>
+        <li>
+          <NavLink className={ ({isActive}) => isActive ? s.active : s.item } to="/Settings">Settings</NavLink>
+        </li>
       </ul>
     </nav>
   );
