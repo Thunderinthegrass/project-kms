@@ -13,7 +13,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className="app-wrapper">
-        <Header name="Александр" surname="Петров" />
+        <Header />
         <Navbar />
         <div className="content">
           <Routes>

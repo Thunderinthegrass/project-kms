@@ -2,33 +2,35 @@ import React from "react";
 import s from "./Dialogs.module.css";
 import { NavLink } from "react-router-dom";
 
+const DialogItem = (props) => {
+  return (
+    <div className={s.dialog}>
+      <NavLink to={`/Dialogs/${props.id}`}>{props.name}</NavLink>
+    </div>
+  )
+}
+
+const Message = (props) => {
+  return (
+    <div className={s.message}>
+      {props.message}
+    </div>
+  )
+}
+
 const Dialogs = () => {
   return (
     <div className={s.dialogsWrapper}>
       <div className={s.dialogs}>
-        <div className={s.dialog}>
-          <NavLink to="/Dialogs/1">Александр</NavLink>
-        </div>
-        <div className={s.dialog}>
-          <NavLink to="/Dialogs/2">Федор</NavLink>
-        </div>
-        <div className={s.dialog}>
-          <NavLink to="/Dialogs/3">Селиван</NavLink>
-        </div>
-        <div className={s.dialog}>
-          <NavLink to="/Dialogs/4">Дед Вовка</NavLink>
-        </div>
+        <DialogItem name="Александр" id="1" />
+        <DialogItem name="Федор" id="2" />
+        <DialogItem name="Селиван" id="3" />
+        <DialogItem name="Дед Вовка" id="4" />
       </div>
       <div className={s.messages}>
-        <div className={s.message}>
-          На болоте туман
-        </div>
-        <div className={s.message}>
-          В урочище ясно
-        </div>
-        <div className={s.message}>
-          Изба стоит
-        </div>
+        <Message message="На болоте туман" />
+        <Message message="В урочище ясно" />
+        <Message message="Изба стоит" />
       </div>
     </div>
   )

@@ -5,7 +5,6 @@ const Header = (props) => {
   return (
     <header className={s.header}>
       <div className={s.logo}>
-        <span>{props.name} {props.surname}</span>
         <img
           className={s.logoImg}
           src="https://i.pinimg.com/736x/1c/73/dc/1c73dc41799f7411a0473102e3971230.jpg"

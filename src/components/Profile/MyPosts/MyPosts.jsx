@@ -12,9 +12,9 @@ const MyPosts = (props) => {
         <button>Добавить пост</button>
       </div>
       <div className="posts">
-        <Post name="Александр" />
-        <Post name="Федор" />
-        <Post name="Селиван" />
+        <Post name="Пост 1" />
+        <Post name="Пост 2" />
+        <Post name="Пост 3" />
       </div>
     </div>
   );
