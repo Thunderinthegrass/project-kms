@@ -1,3 +1,6 @@
 .postsWrapper{
   background: #04976b;
 }
+textarea{
+  caret-color: aqua;
+}
