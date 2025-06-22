@@ -3,6 +3,15 @@ import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
 const MyPosts = (props) => {
+
+  const postsData = [
+    {id: 1, message: "Пост", likes: 15},
+    {id: 2, message: "Пост", likes: 17},
+    {id: 3, message: "Пост", likes: 12}
+  ]
+
+  let postsElements = postsData.map(post => <Post id={post.id} message={post.message} likes={post.likes} />)
+
   return (
     <div className={s.postsWrapper}>
       <div className="new-post">
@@ -12,9 +21,7 @@ const MyPosts = (props) => {
         <button>Добавить пост</button>
       </div>
       <div className="posts">
-        <Post name="Пост 1" />
-        <Post name="Пост 2" />
-        <Post name="Пост 3" />
+        { postsElements }
       </div>
     </div>
   );

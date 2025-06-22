@@ -21,26 +21,30 @@ const Message = (props) => {
 
 const Dialogs = () => {
 
-  const dialogsData1 = [
+  const dialogsData = [
     {id: 1, name: "Александр"},
     {id: 2, name: "Федор"},
     {id: 3, name: "Селиван"},
     {id: 4, name: "Дед Вовка"},
   ]
 
-  const dialogsData2 = [
+  const messagesData = [
     {id: 1, message: "На болоте туман"},
     {id: 2, message: "В урочище ясно"},
     {id: 3, message: "Изба стоит"},
   ]
+
+  let dialogs = dialogsData.map(dialog => <DialogItem name={dialog.name} id={dialog.id} />);
+
+  let messages = messagesData.map(message => <Message message={message.message} />)
   
   return (
     <div className={s.dialogsWrapper}>
       <div className={s.dialogs}>
-        { dialogsData1.map((item) => <DialogItem name={item.name} id={item.id} />) }
+        { dialogs }
       </div>
       <div className={s.messages}>
-        {dialogsData2.map((item) => <Message message={item.message} />)}
+        { messages }
       </div>
     </div>
   )
