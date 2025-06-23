@@ -17,10 +17,17 @@ const messagesData = [
     {id: 3, message: "Изба стоит"},
   ]
 
+const postsData = [
+    {id: 1, message: "Пост", likes: 15},
+    {id: 2, message: "Пост", likes: 17},
+    {id: 3, message: "Пост", likes: 12},
+    {id: 4, message: "Пост", likes: 20},
+  ]
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App dialogs={dialogsData} messages={messagesData} />
+    <App dialogs={dialogsData} messages={messagesData} posts={postsData} />
   </React.StrictMode>
 );
 

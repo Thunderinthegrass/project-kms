@@ -14,7 +14,7 @@ const Profile = (props) => {
         />
       </div>
       <ProfileInfo />
-      <MyPosts />
+      <MyPosts posts={props.posts} />
       Main content
     </div>
   );
