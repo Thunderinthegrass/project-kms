@@ -8,19 +8,10 @@
   color: #ffffff;
   border-right: 1px solid #ffffff;
 }
-.dialog a{
-  text-decoration: none;
-  color: #ffffff;
-}
 .messages{
   padding: 10px;
   color: #ffffff;
   display: flex;
   flex-direction: column;
   gap: 15px;
-}
-.message{
-  background: #b33b3b;
-  padding: 10px 25px;
-  width: 50%;
 }

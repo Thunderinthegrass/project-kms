@@ -4,10 +4,23 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const dialogsData = [
+    {id: 1, name: "Александр"},
+    {id: 2, name: "Федор"},
+    {id: 3, name: "Селиван"},
+    {id: 4, name: "Дед Вовка"},
+  ]
+
+const messagesData = [
+    {id: 1, message: "На болоте туман"},
+    {id: 2, message: "В урочище ясно"},
+    {id: 3, message: "Изба стоит"},
+  ]
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <App dialogs={dialogsData} messages={messagesData} />
   </React.StrictMode>
 );
 
