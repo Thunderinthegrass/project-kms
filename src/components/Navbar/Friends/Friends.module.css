@@ -1,0 +1,6 @@
+.friendsWrapper{
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
