@@ -28,7 +28,7 @@ export const state = {
   }
 };
 
-export let addPost = (postMessage) => {
+export let addPost = (postMessage, rerenderEntireTree) => {
   let postId = state.profilePage.posts.length + 1;
   let newPost = {
     id: postId,
@@ -39,5 +39,7 @@ export let addPost = (postMessage) => {
   state.profilePage.posts.push(newPost);
 
   console.log(state.profilePage.posts);
+
+  rerenderEntireTree()
   
 }
