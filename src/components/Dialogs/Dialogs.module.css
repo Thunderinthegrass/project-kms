@@ -11,7 +11,35 @@
 .messages{
   padding: 10px;
   color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+  display: grid;
+}
+.messagesWrapper{
+  display: grid;
+  grid-template-rows: 41px 41px 41px;
+  align-items: start;
+  grid-gap: 15px;
+}
+.textareaWrapper{
+  padding-left: 30px;
+}
+textarea{
+  height: 150px;
+  width: 70%;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  padding: 10px;
+  box-sizing: border-box;
+  display: block;
+  margin-bottom: 30px;
+}
+.btn{
+  background: #04976B;
+  color: #ffffff;
+  border-radius: 3px;
+  border: none;
+  padding: 10px 23px;
+  box-shadow: none;
+  display: block;
+  cursor: pointer;
 }

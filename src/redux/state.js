@@ -27,3 +27,17 @@ export const state = {
     ]
   }
 };
+
+export let addPost = (postMessage) => {
+  let postId = state.profilePage.posts.length + 1;
+  let newPost = {
+    id: postId,
+    message: postMessage,
+    likes: 10
+  }
+
+  state.profilePage.posts.push(newPost);
+
+  console.log(state.profilePage.posts);
+  
+}
