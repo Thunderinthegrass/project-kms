@@ -21,9 +21,7 @@ const MyPosts = (props) => {
   return (
     <div className={s.postsWrapper}>
       <div className="new-post">
-        <textarea name="" id="" ref={newPostElement} onInput={addInput}>
-
-        </textarea>
+        <textarea name="" id="" ref={newPostElement} onInput={addInput}/>
         <button onClick={ addPost }>Добавить пост</button>
       </div>
       <div className="posts">
