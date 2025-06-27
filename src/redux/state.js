@@ -15,6 +15,7 @@ export const state = {
     ],
   },
   profilePage: {
+    newPostText: "",
     posts: [
       { id: 1, message: "Пост", likes: 15 },
       { id: 2, message: "Пост", likes: 17 },
@@ -30,11 +31,11 @@ export const state = {
   }
 };
 
-export let addPost = (postMessage) => {
+export let addPost = () => {
   let postId = state.profilePage.posts.length + 1;
   let newPost = {
     id: postId,
-    message: postMessage,
+    message: state.profilePage.newPostText,
     likes: 10
   }
 
@@ -44,4 +45,10 @@ export let addPost = (postMessage) => {
 
   rerenderEntireTree(state);
   
+}
+
+export let addNewPostText = (text) => {
+  state.profilePage.newPostText = text;
+
+  rerenderEntireTree(state);
 }
