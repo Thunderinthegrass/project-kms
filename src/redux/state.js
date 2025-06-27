@@ -1,3 +1,5 @@
+import { rerenderEntireTree } from "../render";
+
 export const state = {
   dialogsPage: {
     dialogs: [
@@ -28,7 +30,7 @@ export const state = {
   }
 };
 
-export let addPost = (postMessage, rerenderEntireTree) => {
+export let addPost = (postMessage) => {
   let postId = state.profilePage.posts.length + 1;
   let newPost = {
     id: postId,
@@ -40,6 +42,6 @@ export let addPost = (postMessage, rerenderEntireTree) => {
 
   console.log(state.profilePage.posts);
 
-  rerenderEntireTree()
+  rerenderEntireTree(state);
   
 }
