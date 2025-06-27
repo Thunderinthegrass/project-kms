@@ -9,16 +9,19 @@ const MyPosts = (props) => {
   let newPostElement = React.createRef();
 
   let addPost = () => {
-    let text = newPostElement.current.value;
-    props.addPost(text);
-
+    props.addPost();
     newPostElement.current.value = "";
+  }
+
+  let addInput = () => {
+    let text = newPostElement.current.value;
+    props.addInput(text);
   }
 
   return (
     <div className={s.postsWrapper}>
       <div className="new-post">
-        <textarea name="" id="" ref={newPostElement}>
+        <textarea name="" id="" ref={newPostElement} onInput={addInput}>
 
         </textarea>
         <button onClick={ addPost }>Добавить пост</button>

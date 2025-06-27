@@ -15,6 +15,7 @@ export const state = {
     ],
   },
   profilePage: {
+    newPost: "",
     posts: [
       { id: 1, message: "Пост", likes: 15 },
       { id: 2, message: "Пост", likes: 17 },
@@ -30,18 +31,22 @@ export const state = {
   }
 };
 
-export let addPost = (postMessage) => {
+export let addPost = () => {
   let postId = state.profilePage.posts.length + 1;
   let newPost = {
     id: postId,
-    message: postMessage,
+    message: state.profilePage.newPost,
     likes: 10
   }
 
   state.profilePage.posts.push(newPost);
 
-  console.log(state.profilePage.posts);
-
   rerenderEntireTree(state);
-  
+}
+
+export let addInput = (inp) => {
+
+  state.profilePage.newPost = inp;
+
+  console.log(state.profilePage.posts);
 }
