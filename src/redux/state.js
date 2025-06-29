@@ -1,4 +1,7 @@
-import { rerenderEntireTree } from "../render";
+let rerenderEntireTree = () => {
+  console.log('ggg');
+  
+}
 
 export const state = {
   dialogsPage: {
@@ -31,7 +34,7 @@ export const state = {
   }
 };
 
-export let addPost = () => {
+export const addPost = () => {
   let postId = state.profilePage.posts.length + 1;
   let newPost = {
     id: postId,
@@ -49,8 +52,12 @@ export let addPost = () => {
   
 }
 
-export let addNewPostText = (text) => {
+export const addNewPostText = (text) => {
   state.profilePage.newPostText = text;
 
   rerenderEntireTree(state);
+}
+
+export const subscribe = (observer) => {
+  rerenderEntireTree = observer;
 }
