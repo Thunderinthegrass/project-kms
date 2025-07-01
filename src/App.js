@@ -11,6 +11,7 @@ import Settings from "./components/Settings/Settings";
 import FriendPage from "./components/FriendPage/FriendPage";
 
 const App = (props) => {
+  // debugger
   return (
       <div className="app-wrapper">
         <Header />

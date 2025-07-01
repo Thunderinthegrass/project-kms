@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import Friends from "./Friends/Friends";
 
 const Navbar = (props) => {
-
+// debugger
   return (
     <div className={s.navContainer}>
       <nav className={s.nav}>

@@ -3,6 +3,7 @@ import s from "./Friends.module.css";
 import Friend from "./Friend/Friend";
 
 const Friends = (props) => {
+  // debugger
 
   let friend = props.friends.friends.map(friend => <Friend name={friend.name} imgPath={friend.imgPath} />)
 

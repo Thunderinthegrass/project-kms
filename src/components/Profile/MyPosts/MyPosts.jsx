@@ -3,8 +3,8 @@ import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
 const MyPosts = (props) => {
-
-  let postsElements = props.posts.map(post => <Post id={post.id} message={post.message} likes={post.likes} />)
+// debugger
+  let postsElements = props.posts.posts.map(post => <Post id={post.id} message={post.message} likes={post.likes} />)
 
   let newPostElement = React.createRef();
 
@@ -20,7 +20,7 @@ const MyPosts = (props) => {
   return (
     <div className={s.postsWrapper}>
       <div className="new-post">
-        <textarea name="" id="" ref={newPostElement} onChange={newPostChange} value={props.newPostText} />
+        <textarea name="" id="" ref={newPostElement} onChange={newPostChange} value={props.posts.newPostText} />
         <button onClick={ addPost }>Добавить пост</button>
       </div>
       <div className="posts">
