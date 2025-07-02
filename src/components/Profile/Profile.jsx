@@ -14,7 +14,7 @@ const Profile = (props) => {
         />
       </div>
       <ProfileInfo />
-      <MyPosts posts={props.profileData} addPost={props.addPost} addNewPostText={props.addNewPostText} />
+      <MyPosts posts={props.profileData} dispatch={props.dispatch} />
       Main content
     </div>
   );

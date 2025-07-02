@@ -29,37 +29,38 @@ export const store = {
       ]
     }
   },
-  getState() {
-    return this._state;
-  },
   _callSubscriber() {
     console.log('ggg');
-  },
-  addPost() {
-    let postId = this._state.profilePage.posts.length + 1;
-    let newPost = {
-      id: postId,
-      message: this._state.profilePage.newPostText,
-      likes: 10
-    }
-
-    this._state.profilePage.posts.push(newPost);
-
-    this._state.profilePage.newPostText = "";
-
-    console.log(this._state.profilePage.posts);
-
-    this._callSubscriber(this._state);
-  
-  },
-  addNewPostText(text) {
-    this._state.profilePage.newPostText = text;
-
-    this._callSubscriber(this._state);
   },
   subscribe(observer) {
     this._callSubscriber = observer;
   },
+  getState() {
+    return this._state;
+  },
+  dispatch(action) {
+    if (action.type === "ADD-POST") {
+      let postId = this._state.profilePage.posts.length + 1;
+      let newPost = {
+        id: postId,
+        message: this._state.profilePage.newPostText,
+        likes: 10
+      }
+
+      this._state.profilePage.posts.push(newPost);
+
+      this._state.profilePage.newPostText = "";
+
+      console.log(this._state.profilePage.posts);
+
+      this._callSubscriber(this._state);
+    }
+    if (action.type === "ADD-NEW-POST-TEXT") {
+      this._state.profilePage.newPostText = action.text;
+
+      this._callSubscriber(this._state);
+    }
+  }
 }
 
 window.store = store;
