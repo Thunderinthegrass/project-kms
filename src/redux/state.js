@@ -1,3 +1,6 @@
+const ADD_POST = "ADD-POST";
+const ADD_NEW_POST_TEXT = "ADD-NEW-POST-TEXT";
+
 export const store = {
   _state: {
     dialogsPage: {
@@ -62,5 +65,8 @@ export const store = {
     }
   }
 }
+
+export const addPostActionCreator = () => ({type: ADD_POST});
+export const addNewPostTextActionCreator = (text) => ({type: ADD_NEW_POST_TEXT, text: text })
 
 window.store = store;
