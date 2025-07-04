@@ -1,5 +1,6 @@
 const ADD_POST = "ADD-POST";
 const ADD_NEW_POST_TEXT = "ADD-NEW-POST-TEXT";
+const UPDATE_MESSAGE_TEXT = "UPDATE-MESSAGE-TEXT";
 
 export const store = {
   _state: {
@@ -15,6 +16,7 @@ export const store = {
         { id: 2, message: "В урочище ясно" },
         { id: 3, message: "Изба стоит" },
       ],
+      newMessageText: "ggg",
     },
     profilePage: {
       newPostText: "",
@@ -62,6 +64,10 @@ export const store = {
       this._state.profilePage.newPostText = action.text;
 
       this._callSubscriber(this._state);
+    }
+
+    if (action.type === UPDATE_MESSAGE_TEXT) {
+      
     }
   }
 }

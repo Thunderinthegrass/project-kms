@@ -9,11 +9,10 @@ const Dialogs = (props) => {
 
   let messages = props.dialogsData.messages.map(message => <Message message={message.message} />)
 
-  let newMessage = React.createRef();
+  const newMessageText = React.createRef();
 
-  let addMessage = () => {
-    let text = newMessage.current.value;
-    console.log(text)
+  const updateMessageText = () => {
+    console.log('ggg');
   }
   
   return (
@@ -26,10 +25,10 @@ const Dialogs = (props) => {
            { messages }
         </div>
         <div className={s.textareaWrapper}>
-          <textarea name="" id="" placeholder="Введите ваше сообщение" ref={newMessage}>
+          <textarea name="" id="" placeholder="Введите ваше сообщение" ref={newMessageText} onChange={updateMessageText} value={props.dialogsData.newMessageText}>
 
           </textarea>
-          <button className={s.btn} onClick={addMessage}>
+          <button className={s.btn}>
             Отправить
           </button>
         </div>
