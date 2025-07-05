@@ -1,6 +1,7 @@
 const ADD_POST = "ADD-POST";
 const ADD_NEW_POST_TEXT = "ADD-NEW-POST-TEXT";
 const UPDATE_MESSAGE_TEXT = "UPDATE-MESSAGE-TEXT";
+const ADD_MESSAGE = "ADD-MESSAGE";
 
 export const store = {
   _state: {
@@ -15,8 +16,14 @@ export const store = {
         { id: 1, message: "На болоте туман" },
         { id: 2, message: "В урочище ясно" },
         { id: 3, message: "Изба стоит" },
+        { id: 1, message: "На болоте туман" },
+        { id: 2, message: "В урочище ясно" },
+        { id: 3, message: "Изба стоит" },
+        { id: 1, message: "На болоте туман" },
+        { id: 2, message: "В урочище ясно" },
+        { id: 3, message: "Изба стоит" },
       ],
-      newMessageText: "ggg",
+      newMessageText: "",
     },
     profilePage: {
       newPostText: "",
@@ -67,12 +74,29 @@ export const store = {
     }
 
     if (action.type === UPDATE_MESSAGE_TEXT) {
-      
+      this._state.dialogsPage.newMessageText = action.text;
+
+      this._callSubscriber(this._state);
+    }
+    if (action.type === ADD_MESSAGE) {
+      console.log(this._state.dialogsPage.newMessageText);
+      let postId = this._state.dialogsPage.messages.length + 1;
+      let newMessage = {
+        id: postId,
+        message: this._state.dialogsPage.newMessageText,
+      }
+      this._state.dialogsPage.messages.push(newMessage);
+      this._state.dialogsPage.newMessageText = "";
+
+      this._callSubscriber(this._state);
     }
   }
 }
 
 export const addPostActionCreator = () => ({type: ADD_POST});
-export const addNewPostTextActionCreator = (text) => ({type: ADD_NEW_POST_TEXT, text: text })
+export const addNewPostTextActionCreator = (text) => ({type: ADD_NEW_POST_TEXT, text: text });
+
+export const addNewMessageTextActionCreator = (text) => ({type: UPDATE_MESSAGE_TEXT, text: text});
+export const addMessageActionCreator = () => ({type: ADD_MESSAGE});
 
 window.store = store;

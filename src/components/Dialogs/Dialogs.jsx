@@ -2,6 +2,7 @@ import React from "react";
 import s from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
+import { addMessageActionCreator, addNewMessageTextActionCreator } from "../../redux/state";
 
 const Dialogs = (props) => {
 
@@ -11,8 +12,13 @@ const Dialogs = (props) => {
 
   const newMessageText = React.createRef();
 
-  const updateMessageText = () => {
-    console.log('ggg');
+  const updateMessageText = (text) => {
+    text = newMessageText.current.value;
+    props.dispatch(addNewMessageTextActionCreator(text));
+  }
+
+  const addMessage = () => {
+    props.dispatch(addMessageActionCreator());
   }
   
   return (
@@ -22,13 +28,15 @@ const Dialogs = (props) => {
       </div>
       <div className={s.messages}>
         <div className={s.messagesWrapper}>
-           { messages }
+          <div className={s.messagesInner}>
+            { messages }
+          </div>
         </div>
         <div className={s.textareaWrapper}>
           <textarea name="" id="" placeholder="Введите ваше сообщение" ref={newMessageText} onChange={updateMessageText} value={props.dialogsData.newMessageText}>
 
           </textarea>
-          <button className={s.btn}>
+          <button className={s.btn} onClick={addMessage}>
             Отправить
           </button>
         </div>

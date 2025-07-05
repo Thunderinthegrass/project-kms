@@ -12,12 +12,33 @@
   padding: 10px;
   color: #ffffff;
   display: grid;
+  grid-gap: 25px;
 }
 .messagesWrapper{
   display: grid;
   grid-template-rows: 41px 41px 41px;
   align-items: start;
   grid-gap: 15px;
+  max-width: 800px;
+  width: 100%;
+  height: 100%;
+  overflow-x: auto;
+  background: #e95757;
+  padding: 20px 10px 0;
+}
+.messagesWrapper::-webkit-scrollbar{
+  background: #e0afaf;
+  width: 5px;
+}
+.messagesWrapper::-webkit-scrollbar-thumb{
+  background: #630909;
+  border-radius: 20px;
+}
+.messagesInner{
+  /* background: #630909; */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 .textareaWrapper{
   padding-left: 30px;
