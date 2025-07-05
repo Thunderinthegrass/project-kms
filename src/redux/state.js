@@ -1,3 +1,8 @@
+const ADD_POST = "ADD-POST";
+const ADD_NEW_POST_TEXT = "ADD-NEW-POST-TEXT";
+const ADD_MESSAGE = "ADD-MESSAGE";
+const ADD_NEW_MESSAGE_TEXT = "ADD-NEW-MESSAGE-TEXT";
+
 export const store = {
   _state: {
     dialogsPage: {
@@ -12,6 +17,7 @@ export const store = {
         { id: 2, message: "В урочище ясно" },
         { id: 3, message: "Изба стоит" },
       ],
+      newMessageText: "",
     },
     profilePage: {
       newPostText: "",
@@ -61,7 +67,29 @@ export const store = {
 
       this._callSubscriber(this._state);
     }
+    if (action.type === "ADD-NEW-MESSAGE-TEXT") {
+      this._state.dialogsPage.newMessageText = action.text;
+      this._callSubscriber(this._state);
+    }
+    if (action.type === "ADD-MESSAGE") {
+      const messageId = this._state.dialogsPage.messages.length + 1;
+
+      const message = {
+        id: messageId,
+        message: this._state.dialogsPage.newMessageText,
+      }
+
+      this._state.dialogsPage.messages.push(message);
+
+      this._callSubscriber(this._state);
+    }
   },
 };
+
+export const addNewPostTextActionCreator = (text) => ({type: ADD_NEW_POST_TEXT, text: text});
+export const addPostActionCreator = () => ({type: ADD_POST});
+
+export const addNewMessageTextActionCreator = (text) => ({type: ADD_NEW_MESSAGE_TEXT, text: text});
+export const addMessageActionCreator = () => ({type: ADD_MESSAGE});
 
 
