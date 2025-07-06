@@ -1,5 +1,5 @@
-const ADD_POST = "ADD-POST";
-const ADD_NEW_POST_TEXT = "ADD-NEW-POST-TEXT";
+import profileReducer from "./profile-reduser";
+
 const ADD_MESSAGE = "ADD-MESSAGE";
 const ADD_NEW_MESSAGE_TEXT = "ADD-NEW-MESSAGE-TEXT";
 
@@ -46,27 +46,8 @@ export const store = {
     return this._state;
   },
   dispatch(action) {
-    if (action.type === "ADD-POST") {
-      let postId = this._state.profilePage.posts.length + 1;
-      let newPost = {
-        id: postId,
-        message: this._state.profilePage.newPostText,
-        likes: 10
-      }
-
-      this._state.profilePage.posts.push(newPost);
-
-      this._state.profilePage.newPostText = "";
-
-      console.log(this._state.profilePage.posts);
-
-      this._callSubscriber(this._state);
-    }
-    if (action.type === "ADD-NEW-POST-TEXT") {
-      this._state.profilePage.newPostText = action.text;
-
-      this._callSubscriber(this._state);
-    }
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    
     if (action.type === "ADD-NEW-MESSAGE-TEXT") {
       this._state.dialogsPage.newMessageText = action.text;
       this._callSubscriber(this._state);
@@ -83,11 +64,9 @@ export const store = {
 
       this._callSubscriber(this._state);
     }
+    this._callSubscriber(this._state);
   },
 };
-
-export const addNewPostTextActionCreator = (text) => ({type: ADD_NEW_POST_TEXT, text: text});
-export const addPostActionCreator = () => ({type: ADD_POST});
 
 export const addNewMessageTextActionCreator = (text) => ({type: ADD_NEW_MESSAGE_TEXT, text: text});
 export const addMessageActionCreator = () => ({type: ADD_MESSAGE});

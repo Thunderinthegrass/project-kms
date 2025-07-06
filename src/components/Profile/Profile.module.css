@@ -1,5 +1,7 @@
 .banner{
   width: 600px;
+  display: flex;
+  margin-bottom: 10px;
 }
 .bannerImg{
   width: 100%;
