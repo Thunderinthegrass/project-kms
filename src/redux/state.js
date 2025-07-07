@@ -1,7 +1,5 @@
+import dialogsReduser from "./dialogs-reduser";
 import profileReducer from "./profile-reduser";
-
-const ADD_MESSAGE = "ADD-MESSAGE";
-const ADD_NEW_MESSAGE_TEXT = "ADD-NEW-MESSAGE-TEXT";
 
 export const store = {
   _state: {
@@ -47,28 +45,10 @@ export const store = {
   },
   dispatch(action) {
     this._state.profilePage = profileReducer(this._state.profilePage, action);
-    
-    if (action.type === "ADD-NEW-MESSAGE-TEXT") {
-      this._state.dialogsPage.newMessageText = action.text;
-      this._callSubscriber(this._state);
-    }
-    if (action.type === "ADD-MESSAGE") {
-      const messageId = this._state.dialogsPage.messages.length + 1;
+    this._state.dialogsPage = dialogsReduser(this._state.dialogsPage, action);    
 
-      const message = {
-        id: messageId,
-        message: this._state.dialogsPage.newMessageText,
-      }
-
-      this._state.dialogsPage.messages.push(message);
-
-      this._callSubscriber(this._state);
-    }
     this._callSubscriber(this._state);
   },
 };
-
-export const addNewMessageTextActionCreator = (text) => ({type: ADD_NEW_MESSAGE_TEXT, text: text});
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE});
 
 
