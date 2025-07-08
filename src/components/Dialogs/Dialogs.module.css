@@ -12,6 +12,7 @@
   padding: 10px;
   color: #ffffff;
   display: grid;
+  background: #1dcc97;
 }
 .messagesWrapper{
   display: grid;
