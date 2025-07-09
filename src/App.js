@@ -9,8 +9,10 @@ import News from "./components/News/News";
 import Music from "./components/Musik/Musiс";
 import Settings from "./components/Settings/Settings";
 import FriendPage from "./components/FriendPage/FriendPage";
+import Friends from "./components/Navbar/Friends/Friends";
 
 const App = (props) => {
+  // debugger
   return (
       <div className="app-wrapper">
         <Header />
@@ -19,10 +21,11 @@ const App = (props) => {
           <Routes>
             <Route path="/" element={<Profile profilePage={props.state.profilePage} dispatch={props.dispatch} />} />
             <Route path="/Dialogs" element={<Dialogs dialogsPage={props.state.dialogsPage} dispatch={props.dispatch} />} />
-            <Route path="/News" element={<News />} />
+            <Route path="/News" element={<News newsPage={props.state.newsPage} />} />
             <Route path="/Music" element={<Music />} />
             <Route path="/Settings" element={<Settings />} />
             <Route path="/FriendPage" element={<FriendPage />} />
+            <Route path="/Friends" element={<Friends friendsPage={props.state.friendsPage} />} />
           </Routes>
         </div>
       </div>

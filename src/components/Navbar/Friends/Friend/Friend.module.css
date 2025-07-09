@@ -1,8 +1,9 @@
 .friend{
   display: flex;
-  flex-direction: column;
   align-items: center;
   gap: 5px;
+  max-width: calc(50% - 25px);
+  width: 100%;
 }
 .imgWrapper{
   width: 110px;
@@ -18,9 +19,8 @@
 .friendLink{
   text-decoration: none;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 15px;
   color: #ffffff;
 }
 .friendLinkActive{
