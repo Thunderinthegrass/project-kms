@@ -1,13 +1,19 @@
 import React from "react";
 import s from "./News.module.css";
 import NewsItem from "./NewsItem/NewsItem";
+import { addNewNewsTextActionCreator, addNewsActionCreator } from "../../redux/news-reduser";
 
 const News = (props) => {
 // debugger
   const newsElements = props.newsPage.news.map(news => <NewsItem id={news.id} news={news.news} />)
 
-  const updateNewNewsText = () => {
-    
+  const updateNewNewsText = (e) => {
+    props.dispatch(addNewNewsTextActionCreator(e.target.value));
+    console.log(props.newsPage.newNewsText)
+  }
+
+  const addNews = () => {
+    props.dispatch(addNewsActionCreator());
   }
 
   return (
@@ -18,7 +24,7 @@ const News = (props) => {
           {newsElements}
         </div>
         <textarea name="" id="" onChange={updateNewNewsText} placeholder="Введите текст новости"></textarea>
-        <button>Добавить новость</button>
+        <button onClick={addNews}>Добавить новость</button>
       </div>
     </div>
   )

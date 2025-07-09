@@ -1,4 +1,5 @@
 import dialogsReduser from "./dialogs-reduser";
+import newsReduser from "./news-reduser";
 import profileReducer from "./profile-reduser";
 
 export const store = {
@@ -33,6 +34,7 @@ export const store = {
       ]
     },
     newsPage: {
+      newNewsText: "",
       news: [
         { id: 1, news: "Новость" },
         { id: 2, news: "Новость" },
@@ -52,7 +54,8 @@ export const store = {
   },
   dispatch(action) {
     this._state.profilePage = profileReducer(this._state.profilePage, action);
-    this._state.dialogsPage = dialogsReduser(this._state.dialogsPage, action);    
+    this._state.dialogsPage = dialogsReduser(this._state.dialogsPage, action);
+    this._state.newsPage = newsReduser(this._state.newsPage, action);
 
     this._callSubscriber(this._state);
   },
