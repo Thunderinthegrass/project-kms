@@ -5,6 +5,7 @@ export const addNewPostTextActionCreator = (text) => ({type: ADD_NEW_POST_TEXT, 
 export const addPostActionCreator = () => ({type: ADD_POST});
 
 const profileReducer = (state, action) => {
+  debugger
   switch (action.type) {
     case ADD_POST:
       let postId = state.posts.length + 1;
