@@ -4,8 +4,18 @@ const ADD_NEW_POST_TEXT = "ADD-NEW-POST-TEXT";
 export const addNewPostTextActionCreator = (text) => ({type: ADD_NEW_POST_TEXT, text: text});
 export const addPostActionCreator = () => ({type: ADD_POST});
 
-const profileReducer = (state, action) => {
-  debugger
+let initialState = {
+      newPostText: "",
+      posts: [
+        { id: 1, message: "Пост", likes: 15 },
+        { id: 2, message: "Пост", likes: 17 },
+        { id: 3, message: "Пост", likes: 12 },
+        { id: 4, message: "Пост", likes: 20 },
+      ],
+    }
+
+const profileReducer = (state = initialState, action) => {
+  // debugger
   switch (action.type) {
     case ADD_POST:
       let postId = state.posts.length + 1;

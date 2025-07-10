@@ -4,7 +4,16 @@ const ADD_NEWS = "ADD-NEWS";
 export const addNewNewsTextActionCreator = (news) => ({type: ADD_NEW_NEWS_TEXT, news: news});
 export const addNewsActionCreator = () => ({type: ADD_NEWS});
 
-const newsReduser = (state, action) => {
+let initialState = {
+      newNewsText: "",
+      news: [
+        { id: 1, news: "Новость" },
+        { id: 2, news: "Новость" },
+        { id: 3, news: "Новость" },
+      ]
+    };
+
+const newsReduser = (state = initialState, action) => {
   switch (action.type) {
     case ADD_NEW_NEWS_TEXT:
       state.newNewsText = action.news;
