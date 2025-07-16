@@ -2,7 +2,6 @@ import React from "react";
 import s from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import { addMessageActionCreator, addNewMessageTextActionCreator } from "../../redux/dialogs-reduser";
 
 const Dialogs = (props) => {
 
@@ -12,13 +11,13 @@ const Dialogs = (props) => {
 
   let newMessageText = React.createRef();
 
-  let addNewMessageText = () => {
+  let onAddNewMessageText = () => {
     let text = newMessageText.current.value;
-    props.dispatch(addNewMessageTextActionCreator(text));
+    props.addNewMessageText(text);
   }
 
-  const addMessage = () => {
-    props.dispatch(addMessageActionCreator());
+  const onAddMessage = () => {
+    props.addMessage();
   }
   
   return (
@@ -31,10 +30,10 @@ const Dialogs = (props) => {
            { messages }
         </div>
         <div className={s.textareaWrapper}>
-          <textarea name="" id="" placeholder="Введите ваше сообщение" ref={newMessageText} value={props.dialogsPage.newMessageText} onChange={addNewMessageText} >
+          <textarea name="" id="" placeholder="Введите ваше сообщение" ref={newMessageText} value={props.dialogsPage.newMessageText} onChange={onAddNewMessageText} >
 
           </textarea>
-          <button className={s.btn} onClick={addMessage}>
+          <button className={s.btn} onClick={onAddMessage}>
             Отправить
           </button>
         </div>

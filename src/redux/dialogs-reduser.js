@@ -33,6 +33,8 @@ const dialogsReduser = (state = initialState, action) => {
       }
 
       state.messages.push(message);
+
+      state.newMessageText = "";
       return state;
     default: return state;
   }

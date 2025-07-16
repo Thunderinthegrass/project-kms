@@ -24,6 +24,8 @@ const newsReduser = (state = initialState, action) => {
         news: state.newNewsText,
       }
       state.news.push(newNews);
+
+      state.newNewsText = "";
       return state;
     default: return state;
   }
