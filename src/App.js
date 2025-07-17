@@ -8,8 +8,8 @@ import { Route, Routes } from "react-router-dom";
 import Music from "./components/Musik/Musiс";
 import Settings from "./components/Settings/Settings";
 import FriendPage from "./components/FriendPage/FriendPage";
-import Friends from "./components/Navbar/Friends/Friends";
 import NewsContainer from "./components/News/NewsContainer";
+import FriendsContainer from "./components/Navbar/Friends/FriendsContainer";
 
 const App = (props) => {
   // debugger
@@ -19,13 +19,13 @@ const App = (props) => {
         <Navbar state={props.state} />
         <div className="content">
           <Routes>
-            <Route path="/" element={<Profile store={props.store} />} />
-            <Route path="/Dialogs" element={<DialogsContainer store={props.store} />} />
-            <Route path="/News" element={<NewsContainer store={props.store} />} />
+            <Route path="/" element={<Profile />} />
+            <Route path="/Dialogs" element={<DialogsContainer />} />
+            <Route path="/News" element={<NewsContainer />} />
             <Route path="/Music" element={<Music />} />
             <Route path="/Settings" element={<Settings />} />
             <Route path="/FriendPage" element={<FriendPage />} />
-            <Route path="/Friends" element={<Friends friendsPage={props.state.friendsPage} />} />
+            <Route path="/Friends" element={<FriendsContainer />} />
           </Routes>
         </div>
       </div>
