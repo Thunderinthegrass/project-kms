@@ -23,7 +23,8 @@ const dialogsReduser = (state = initialState, action) => {
   switch (action.type) {
     case ADD_NEW_MESSAGE_TEXT:
       state.newMessageText = action.text;
-      return state;
+
+      return {...state};
     case ADD_MESSAGE:
       const messageId = state.messages.length + 1;
 
@@ -32,10 +33,15 @@ const dialogsReduser = (state = initialState, action) => {
         message: state.newMessageText,
       }
 
-      state.messages.push(message);
+      let stateCopy = {...state};
 
-      state.newMessageText = "";
-      return state;
+      stateCopy.messages = [...state.messages];
+      stateCopy.messages.push(message);
+
+      stateCopy.newMessageText = "";
+
+      console.log(state)
+      return stateCopy;
     default: return state;
   }
 }

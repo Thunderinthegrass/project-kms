@@ -8,7 +8,7 @@ import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-const rerenderEntireTree = () => {
+// const rerenderEntireTree = () => {
   // debugger
   root.render(
     <React.StrictMode>
@@ -19,9 +19,9 @@ const rerenderEntireTree = () => {
       </BrowserRouter>
     </React.StrictMode>
   );
-};
+// };
 
-rerenderEntireTree();
+// rerenderEntireTree();
 
-store.subscribe(() => rerenderEntireTree());
+// store.subscribe(() => rerenderEntireTree());
 
