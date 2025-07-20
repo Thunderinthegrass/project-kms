@@ -16,19 +16,20 @@ let initialState = {
 const newsReduser = (state = initialState, action) => {
   switch (action.type) {
     case ADD_NEW_NEWS_TEXT:
-      state.newNewsText = action.news;
-      return {...state};
+      return {
+        ...state,
+        newNewsText: action.news
+      };
     case ADD_NEWS:
       const newNews = {
         id: state.news.length + 1,
         news: state.newNewsText,
       }
-      let stateCopy = {...state};
-      stateCopy.news = [...state.news];
-      stateCopy.news.push(newNews);
-
-      stateCopy.newNewsText = "";
-      return stateCopy;
+      return {
+        ...state,
+        news: [...state.news, newNews],
+        newNewsText: ""
+      };
     default: return state;
   }
 }

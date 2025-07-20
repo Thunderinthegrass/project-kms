@@ -22,9 +22,9 @@ let initialState = {
 const dialogsReduser = (state = initialState, action) => {
   switch (action.type) {
     case ADD_NEW_MESSAGE_TEXT:
-      state.newMessageText = action.text;
-
-      return {...state};
+      return {...state,
+        newMessageText: action.text
+      };
     case ADD_MESSAGE:
       const messageId = state.messages.length + 1;
 

@@ -18,13 +18,10 @@ const profileReducer = (state = initialState, action) => {
   // debugger
   switch (action.type) {
     case ADD_NEW_POST_TEXT:
-      state.newPostText = action.text;
-      return {...state};
-
-      // return {
-      //   ...state,
-      //   newPostText: action.text, // Создаем новый объект состояния
-      // };
+      return {// Создаем новый объект состояния
+        ...state,
+        newPostText: action.text
+      }
     case ADD_POST:
       const postId = state.posts.length + 1;
 
@@ -34,19 +31,11 @@ const profileReducer = (state = initialState, action) => {
           likes: 10
         }
 
-        let stateCopy = {...state};
-        stateCopy.posts = [...state.posts];
-        stateCopy.posts.push(newPost);
-        
-        stateCopy.newPostText = "";
-
-        return stateCopy;
-
-        // return {
-      //   ...state,
-      //   posts: [...state.posts, newPost], // ✅ Новый массив
-      //   newPostText: "" // ✅ Сброс текста
-      // };
+        return {
+          ...state,
+          posts: [...state.posts, newPost],// ✅ Новый массив
+          newPostText: ""// ✅ Сброс текста
+        }
       default: return state;
   }
 };
