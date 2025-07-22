@@ -10,7 +10,7 @@ let reducers = combineReducers({
   dialogsPage: dialogsReduser,
   newsPage: newsReduser,
   friendsPage: friendsReduser,
-  users: usersReduser
+  usersPage: usersReduser,
 });
 
 let store = createStore(reducers);
