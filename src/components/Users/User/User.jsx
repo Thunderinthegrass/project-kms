@@ -16,9 +16,9 @@ const User = (props) => {
         <div className={s.userInfoItem}><span className={s.punkt}>Адрес: </span>{props.data.location.address}</div>
       </div>
       {props.data.followed ? (
-        <button className={s.followBtn} onClick={() => props.follow(props.id) } >Подписан</button>
+        <button className={s.followBtn} onClick={() => props.unFollow(props.id) } >Отписаться</button>
       ) : (
-        <button className={s.followBtn} onClick={() => props.unFollow(props.id) } >Отписан</button>
+        <button className={s.followBtn} onClick={() => props.follow(props.id) } >Подписаться</button>
       )}
     </div>
   )
