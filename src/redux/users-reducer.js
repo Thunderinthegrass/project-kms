@@ -15,7 +15,7 @@ let initialState = {
   users: [],
 };
 
-const usersReduser = (state = initialState, action) => {
+const usersReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_USERS:
       console.log(state);
@@ -47,4 +47,4 @@ const usersReduser = (state = initialState, action) => {
   }
 };
 
-export default usersReduser;
+export default usersReducer;

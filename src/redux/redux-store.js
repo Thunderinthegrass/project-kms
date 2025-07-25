@@ -3,14 +3,14 @@ import profileReducer from "./profile-reduser";
 import dialogsReduser from "./dialogs-reduser";
 import newsReduser from "./news-reduser";
 import friendsReduser from "./friends-reduser";
-import usersReduser from "./users-reduser";
+import usersReducer from "./users-reducer";
 
 let reducers = combineReducers({
   profilePage: profileReducer,
   dialogsPage: dialogsReduser,
   newsPage: newsReduser,
   friendsPage: friendsReduser,
-  usersPage: usersReduser,
+  usersPage: usersReducer,
 });
 
 let store = createStore(reducers);
