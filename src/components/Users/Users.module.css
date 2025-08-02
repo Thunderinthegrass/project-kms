@@ -12,7 +12,9 @@
 .addUsersBtn{
   background: #107d8b;
 }
+.users{
 
+}
 .user{
   color: #ffffff;
   border: 1px solid #ffffff;
@@ -49,4 +51,7 @@
   margin-left: auto;
   height: 40px;
   width: 120px;
+}
+.selectedPage{
+    background: #0becb8;
 }
