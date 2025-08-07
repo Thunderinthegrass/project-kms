@@ -6,22 +6,37 @@ const Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);//получаем количество страниц, если остаток - округляем в большую сторону
 
   let pages = [];//объявляем массив
-  for (let i = 1; i <= pagesCount; i++) {//заполняем массив числами, каждоечисло - номер страницы и пушим их в массив
+  for (let i = 1; i <= pagesCount; i++) {//заполняем массив числами, каждое число - номер страницы и пушим их в массив
     pages.push(i);
   }
 
-  // props.componentDidMount();
+  const changePageSize = (e) => {//функция изменения количества элементов на каждой странице, то есть сколько человек одновременно выводить
+    let pageSize = e.currentTarget.dataset.value;
+
+    props.onPageChanged(1);//откатываемся к первой странице после обновления количества элементов на странице
+    props.onChangeQuantityOnPage(pageSize);//меняем в стейте число, обозначающее количество пользователей на странице
+    props.addNewQuantityUsers(pageSize);//делаем переотправку, чтоб обновленные данные подтянуть
+    props.addNewQuantityUsers(pageSize);//делаем переотправку, чтоб обновленные данные подтянуть
+  }
 
   return <div className={s.users}>
     {
       pages.map(page => {//отрисовываем кнопки
-        return <button className={props.currentPage === page && s.selectedPage}
+        return <button key={page} className={props.currentPage === page ? s.selectedPage : s.page}
                        onClick={() => {props.onPageChanged(page)}}>
           {page}
         </button>
       })
     }
+
     <div className={s.container}>
+      <div className={s.showBy}>
+        <button>показать по</button>
+        <button onClick={changePageSize} data-value="5" >5</button>
+        <button onClick={changePageSize} data-value="10" >10</button>
+        <button onClick={changePageSize} data-value="100" >100</button>
+        {/* <button onClick={changePageSize} data-value="10000" >1000</button> здесь ошибка почему-то */}
+      </div>
       <div className={s.usersWrapper}>
         {
           props.users.map( user =>
@@ -39,7 +54,6 @@ const Users = (props) => {
             </div> )
         }
       </div>
-      <button className={s.addUsersBtn}>Добавить пользователей</button>
     </div>
   </div>
 }
