@@ -9,7 +9,7 @@ class ProfileContainerComponent extends React.Component {
   componentDidMount() {
       axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`).then((response) => {
 
-        this.props.setUserProfile(response.data.aboutMe);
+        this.props.setUserProfile(response.data);
         // console.log(response.data);
       })
   }
@@ -26,7 +26,7 @@ const mapStateToProps = (state) => {
   return {
     posts: state.profilePage.posts,
     newPostText: state.profilePage.newPostText,
-    aboutUser: state.profilePage.aboutUser,
+    userData: state.profilePage.userData,
   }
 }
 

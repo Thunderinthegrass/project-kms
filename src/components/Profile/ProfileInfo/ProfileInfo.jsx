@@ -15,7 +15,8 @@ const ProfileInfo = (props) => {
         </div>
         <div className={s.userName}>
           Кот Леопольд
-          <p>{props.aboutUser}</p>
+          <p>{props.userData.aboutMe}</p>
+          <p>{props.userData.lookingForAJobDescription}</p>
         </div>
       </div>
   )

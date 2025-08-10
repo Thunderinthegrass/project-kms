@@ -14,7 +14,7 @@ let initialState = {
         { id: 4, message: "Пост", likes: 20 },
       ],
       newPostText: "",
-      aboutUser: "",
+      userData: {},//можно в качестве начального значения сделать null, тогда в эту переменную будет приходить объект, и можно будет его не копировать
     }
 
 const profileReducer = (state = initialState, action) => {
@@ -29,21 +29,21 @@ const profileReducer = (state = initialState, action) => {
     case ADD_POST:
       const postId = state.posts.length + 1;
 
-        const newPost = {
-          id: postId,
-          message: state.newPostText,
-          likes: 10
-        }
-    case SET_USER_PROFILE:
-      console.log(state.userProfile);
-      return {
-        ...state, aboutUser: action.data
+      const newPost = {
+        id: postId,
+        message: state.newPostText,
+        likes: 10
       }
-        return {
-          ...state,
-          posts: [...state.posts, newPost],// ✅ Новый массив
-          newPostText: ""// ✅ Сброс текста
-        }
+      return {
+        ...state,
+        posts: [...state.posts, newPost],// ✅ Новый массив
+        newPostText: ""// ✅ Сброс текста
+      }
+    case SET_USER_PROFILE:
+      console.log(state);
+      return  {
+        ...state, userData: {...action.data}
+      }
       default: return state;
   }
 };
