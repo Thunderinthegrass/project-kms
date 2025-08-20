@@ -40,7 +40,7 @@ const profileReducer = (state = initialState, action) => {
         newPostText: ""// ✅ Сброс текста
       }
     case SET_USER_PROFILE:
-      console.log(state);
+      // console.log(state);
       return  {
         ...state, userData: {...action.data}
       }

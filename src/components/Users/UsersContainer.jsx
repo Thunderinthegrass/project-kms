@@ -17,7 +17,7 @@ class UsersContainerComponent extends React.Component {
 
         console.log(response);
         this.props.setUsers(response.data.items);
-        this.props.setTotalUsersCount(response.data.totalCount / 500);//приходит слишком много страниц, таким образом их количество уменьшается в 500 раз
+        this.props.setTotalUsersCount(response.data.totalCount - 27500);//приходит слишком много страниц, таким образом их количество уменьшается в 500 раз
         // this.props.setTotalUsersCount(response.data.totalCount);//приходят все данные
       })
     }
@@ -25,7 +25,7 @@ class UsersContainerComponent extends React.Component {
 
   onPageChanged = (page) => {
     this.props.onIsFetching(true);
-console.log(this.props.users.length);
+  console.log(this.props.users.length);
     this.props.setCurrentPage(page);
 
     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then((response) => {
@@ -65,7 +65,7 @@ console.log(this.props.users.length);
               follow={this.props.follow}
               unFollow={this.props.unFollow}
               onChangeQuantityOnPage={this.props.onChangeQuantityOnPage}
-               addNewQuantityUsers={this.addNewQuantityUsers}
+              addNewQuantityUsers={this.addNewQuantityUsers}
         />
       </>
     )

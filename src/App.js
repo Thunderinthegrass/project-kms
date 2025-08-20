@@ -11,16 +11,18 @@ import NewsContainer from "./components/News/NewsContainer";
 import FriendsContainer from "./components/Navbar/Friends/FriendsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
+import HeaderContainer from "./components/Header/HeaderContainer";
 
 const App = (props) => {
   // debugger
   return (
       <div className="app-wrapper">
-        <Header />
+        <HeaderContainer />
         <Navbar state={props.state} />
         <div className="content">
           <Routes>
             <Route path="/" element={<ProfileContainer />} />
+            <Route path="/profile/:userId?" element={<ProfileContainer />} />
             <Route path="/Dialogs" element={<DialogsContainer />} />
             <Route path="/News" element={<NewsContainer />} />
             <Route path="/Music" element={<Music />} />

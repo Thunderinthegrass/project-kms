@@ -3,15 +3,34 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {addNewPostText, addPost, setUserProfile} from "../../redux/profile-reduser";
 import axios from "axios";
+import { useParams } from "react-router-dom";
+
+function withRouter(WrappedComponent) {
+  return (props) => {//проверяем, передается ли параметр userId, и если нет, то ничего не делаем.
+    const match = {params: useParams()}; //Здесь каким-то образом появляется айдишник, переданный в NavLink при отрисовке
+    console.log(match);
+    return <WrappedComponent {...props} match={match} />;
+  }
+}
 
 class ProfileContainerComponent extends React.Component {
 
   componentDidMount() {
-      axios.get(`https://social-network.samuraijs.com/api/1.0/profile/2`).then((response) => {
+
+    if (this.props.match.params.userId) {//проверяем, передается ли параметр userId, и если нет, то ничего не делаем.
+      axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${this.props.match.params.userId}`).then((response) => {//если передается, то отправляем запрос и отрисовываем нужного пользователя
 
         this.props.setUserProfile(response.data);
         // console.log(response.data);
+        console.log(this.props.match.params.userId);
       })
+    }
+      // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${this.props.match.params.userId}`).then((response) => {
+
+      //   this.props.setUserProfile(response.data);
+      //   // console.log(response.data);
+      //   console.log(this.props.match.params.userId);
+      // })
   }
 
   render() {
@@ -36,6 +55,8 @@ const mapDispatchToProps = {
     setUserProfile,
 }
 
-const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(ProfileContainerComponent);
+const ProfileContainerComponentWithUrl = withRouter(ProfileContainerComponent);
+
+const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(ProfileContainerComponentWithUrl);
 
 export default ProfileContainer;
