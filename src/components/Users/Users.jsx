@@ -2,6 +2,7 @@ import React from 'react';
 import s from "./Users.module.css";
 import userImage from "../../assets/images.png";
 import {NavLink} from "react-router-dom";
+import axios from 'axios';
 
 const Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);//получаем количество страниц, если остаток - округляем в большую сторону
@@ -41,20 +42,55 @@ const Users = (props) => {
       <div className={s.usersWrapper}>
         {
           props.users.map( user =>
-            <NavLink to={`/profile/${user.id}`} key={user.id}>{/*сюда подставляется айдишник юзера*/}
               <div className={s.user} key={user.id} >
-                <div className={s.userImgWrapper}>
-                  <img src={user.photos.large !== null ? user.img : userImage} alt="" className={s.userImg} />
-                </div>
-                <div className={s.userInfo}>
-                  <div className={s.userInfoItem}><span className={s.punkt}>Имя: </span>{user.name}</div>
-                </div>
+                <NavLink to={`/profile/${user.id}`} className={s.userLink} key={user.id}>{/*сюда подставляется айдишник юзера*/}
+                  <div className={s.userImgWrapper}>
+                    <img src={user.photos.large !== null ? user.img : userImage} alt="" className={s.userImg} />
+                  </div>
+                  <div className={s.userInfo}>
+                    <div className={s.userInfoItem}><span className={s.punkt}>Имя: </span>{user.name}</div>
+                  </div>
+                </NavLink>
                 {user.followed
-                  ? <button className={s.followBtn} onClick={() => props.unFollow(user.id) } >Отписаться</button>
-                  : <button className={s.followBtn} onClick={() => props.follow(user.id) } >Подписаться</button>
+                  // ? <button className={s.followBtn} onClick={() => props.unFollow(user.id) } >Отписаться</button>
+                  // : <button className={s.followBtn} onClick={() => props.follow(user.id) } >Подписаться</button>
+                  ? <button className={s.followBtn} 
+                            onClick={() => {
+                              axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
+                                {
+                                  withCredentials: true,
+                                  headers: {
+                                    'API-KEY': '',
+                                  }
+                                }).then((response) => {
+                                  console.log(response)
+                                  console.log(response.data)
+                                  console.log(response.data.resultCode)
+                                })
+
+                                props.unFollow(user.id)
+                            }} >
+                      Отписаться
+                    </button>
+                  : <button className={s.followBtn} 
+                            onClick={() => {
+                              axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {},
+                                {
+                                  withCredentials: true,
+                                  headers: {
+                                    'API-KEY': '',
+                                  }
+                                }).then((response) => {
+                                  console.log(response.data)
+                                  console.log(response.data.resultCode)
+                                })
+
+                                props.follow(user.id)
+                            }} >
+                      Подписаться
+                    </button>
                 }
               </div>
-            </NavLink>
           )
         }
       </div>

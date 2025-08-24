@@ -3,7 +3,6 @@ import { follow, setUsers, unFollow, setCurrentPage, setTotalUsersCount, onChang
 import React from "react";
 import axios from "axios";
 import Users from "./Users";
-import preloader from "../../assets/loader.svg";
 import Preloader from "../common/Preloader/Preloader";
 
 
@@ -12,7 +11,7 @@ class UsersContainerComponent extends React.Component {
   componentDidMount() {
     if (this.props.users.length === 0) {
       this.props.onIsFetching(true);
-      axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then((response) => {
+      axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {withCredentials: true,}).then((response) => {
         this.props.onIsFetching(false);
 
         console.log(response);
@@ -28,7 +27,7 @@ class UsersContainerComponent extends React.Component {
   console.log(this.props.users.length);
     this.props.setCurrentPage(page);
 
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`).then((response) => {
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {withCredentials: true,}).then((response) => {
 
       this.props.onIsFetching(false);
 
@@ -42,7 +41,7 @@ class UsersContainerComponent extends React.Component {
     this.props.onIsFetching(true);
 
     // this.props.setCurrentPage(page);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${1}&count=${pageSize}`).then((response) => {
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${1}&count=${pageSize}`, {withCredentials: true,}).then((response) => {
 
       this.props.onIsFetching(false);
 
