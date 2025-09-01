@@ -8,10 +8,10 @@ import { connect } from 'react-redux';
 class HeaderContainerComponent extends Component {
   componentDidMount() {
     axios.get('https://social-network.samuraijs.com/api/1.0/auth/me', {withCredentials: true,}).then(response => {
-      console.log(response.data);
+      // console.log(response.data);
       const data = response.data;
       this.props.userData(data.data.id, data.data.email, data.data.login, data.resultCode);
-      console.log(this.props.authData);
+      // console.log(this.props.authData);
     })
   }
 

@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
 import { follow, setUsers, unFollow, setCurrentPage, setTotalUsersCount, onChangeQuantityOnPage, onIsFetching } from "../../redux/users-reducer";
 import React from "react";
-import axios from "axios";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
+import { getPageChange, getPageSize, getUsers } from "../../api/api";
 
 
 class UsersContainerComponent extends React.Component {
@@ -11,12 +11,13 @@ class UsersContainerComponent extends React.Component {
   componentDidMount() {
     if (this.props.users.length === 0) {
       this.props.onIsFetching(true);
-      axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {withCredentials: true,}).then((response) => {
+      
+      getUsers(this.props.currentPage, this.props.pageSize).then((data) => {//getUsers находится в api.js
         this.props.onIsFetching(false);
 
-        console.log(response);
-        this.props.setUsers(response.data.items);
-        this.props.setTotalUsersCount(response.data.totalCount - 27500);//приходит слишком много страниц, таким образом их количество уменьшается в 500 раз
+        // console.log(data);
+        this.props.setUsers(data.items);
+        this.props.setTotalUsersCount(data.totalCount - 27500);//приходит слишком много страниц, таким образом их количество уменьшается в 500 раз
         // this.props.setTotalUsersCount(response.data.totalCount);//приходят все данные
       })
     }
@@ -27,13 +28,13 @@ class UsersContainerComponent extends React.Component {
   console.log(this.props.users.length);
     this.props.setCurrentPage(page);
 
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {withCredentials: true,}).then((response) => {
+    getPageChange(page, this.props.pageSize).then((data) => {//getPageChanges находится в api.js
 
       this.props.onIsFetching(false);
 
-      console.log(this.props.pageSize);
+      // console.log(this.props.pageSize);
       // console.log(response);
-      this.props.setUsers(response.data.items);
+      this.props.setUsers(data.items);
     });
   }
 
@@ -41,13 +42,13 @@ class UsersContainerComponent extends React.Component {
     this.props.onIsFetching(true);
 
     // this.props.setCurrentPage(page);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${1}&count=${pageSize}`, {withCredentials: true,}).then((response) => {
+    getPageSize(pageSize).then((data) => {//getPageSize находится в api.js
 
       this.props.onIsFetching(false);
 
-      console.log(this.props.pageSize);
-      console.log(response);
-      this.props.setUsers(response.data.items);
+      // console.log(this.props.pageSize);
+      // console.log(data);
+      this.props.setUsers(data.items);
     });
   }
 

@@ -3,6 +3,7 @@ import s from "./Users.module.css";
 import userImage from "../../assets/images.png";
 import {NavLink} from "react-router-dom";
 import axios from 'axios';
+import { getFollow, getUnfollow } from '../../api/api';
 
 const Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);//получаем количество страниц, если остаток - округляем в большую сторону
@@ -56,36 +57,17 @@ const Users = (props) => {
                   // : <button className={s.followBtn} onClick={() => props.follow(user.id) } >Подписаться</button>
                   ? <button className={s.followBtn} 
                             onClick={() => {
-                              axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-                                {
-                                  withCredentials: true,
-                                  headers: {
-                                    'API-KEY': '',
-                                  }
-                                }).then((response) => {
-                                  console.log(response)
-                                  console.log(response.data)
-                                  console.log(response.data.resultCode)
-                                })
+                              getUnfollow(user.id)
 
-                                props.unFollow(user.id)
+                              props.unFollow(user.id)
                             }} >
                       Отписаться
                     </button>
                   : <button className={s.followBtn} 
                             onClick={() => {
-                              axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {},
-                                {
-                                  withCredentials: true,
-                                  headers: {
-                                    'API-KEY': '',
-                                  }
-                                }).then((response) => {
-                                  console.log(response.data)
-                                  console.log(response.data.resultCode)
-                                })
+                              getFollow(user.id, {});
 
-                                props.follow(user.id)
+                              props.follow(user.id);
                             }} >
                       Подписаться
                     </button>
