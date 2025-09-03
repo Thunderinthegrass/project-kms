@@ -22,7 +22,7 @@ export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, current
 export const setTotalUsersCount = (totalCount) => ({type: SET_TOTAL_USERS_COUNT, totalCount});
 export const onChangeQuantityOnPage = (pageSize) => ({type: ON_CHANGE_QUANTITY_ON_PAGE, pageSize});
 export const onIsFetching = (isFetching) => ({type: ON_IS_FETCHING, isFetching});
-export const onFollowingProgress = (isfetching, userId) => ({type: ON_FOLLOWING_PROGRESS, isfetching, userId });
+export const onFollowingProgress = (followingProgress) => ({type: ON_FOLLOWING_PROGRESS, followingProgress});
 
 let initialState = {
   users: [],
@@ -30,7 +30,7 @@ let initialState = {
   totalUsersCount: 0,
   currentPage: 1,
   isFetching: true,
-  followingProgress: [],
+  followingProgress: false
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -70,11 +70,7 @@ const usersReducer = (state = initialState, action) => {
     case ON_IS_FETCHING:
       return {...state, isFetching: action.isFetching};
     case ON_FOLLOWING_PROGRESS:
-      return {...state,
-         followingProgress: action.isfetching 
-         ? [...state.followingProgress, action.userId]
-         : state.followingProgress.filter(id => id !== action.userId)
-        };
+      return {...state, followingProgress: action.followingProgress};
     default:
       return state;
   }
