@@ -1,11 +1,11 @@
 import React from 'react';
-import s from "./Users.module.css";
+import s from "./Users.module.scss";
 import userImage from "../../assets/images.png";
 import {NavLink} from "react-router-dom";
 import axios from 'axios';
-import { getFollow, getUnfollow } from '../../api/api';
 
 const Users = (props) => {
+  // debugger
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);//получаем количество страниц, если остаток - округляем в большую сторону
 
   let pages = [];//объявляем массив
@@ -53,22 +53,53 @@ const Users = (props) => {
                   </div>
                 </NavLink>
                 {user.followed
-                  // ? <button className={s.followBtn} onClick={() => props.unFollow(user.id) } >Отписаться</button>
-                  // : <button className={s.followBtn} onClick={() => props.follow(user.id) } >Подписаться</button>
-                  ? <button className={s.followBtn} 
+                  ? <button className={props.followingProgress.some(elem => elem === user.id) ? `${s.followBtn} ${s.disabledBtn}` : s.followBtn} 
                             onClick={() => {
-                              getUnfollow(user.id)
+                              props.onFollowingProgress(true, user.id);
+                              axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
+                                {
+                                  withCredentials: true,
+                                  headers: {
+                                    'API-KEY': '6c488209-dce2-4433-a8ed-e59e78351743',
+                                  }
+                                }).then((response) => {
+                                  console.log(response)
+                                  console.log(response.data)
+                                  console.log(response.data.resultCode)
 
-                              props.unFollow(user.id)
-                            }} >
+                                  if (response.data.resultCode === 0) {
+                                    props.unFollow(user.id);
+                                  }
+                                  
+                                  props.onFollowingProgress(false, user.id);
+                                })
+                            }}
+                            disabled={props.followingProgress.some(elem => elem === user.id) ? 'disabled' : null}
+                            >
                       Отписаться
                     </button>
-                  : <button className={s.followBtn} 
+                  : <button className={props.followingProgress.some(elem => elem === user.id) ? `${s.followBtn} ${s.disabledBtn}` : s.followBtn} 
                             onClick={() => {
-                              getFollow(user.id, {});
+                              props.onFollowingProgress(true, user.id);
+                              axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {},
+                                {
+                                  withCredentials: true,
+                                  headers: {
+                                    'API-KEY': '6c488209-dce2-4433-a8ed-e59e78351743',
+                                  }
+                                }).then((response) => {
+                                  console.log(response.data)
+                                  console.log(response.data.resultCode)
 
-                              props.follow(user.id);
-                            }} >
+                                  if (response.data.resultCode === 0) {
+                                    props.follow(user.id);
+                                  }
+
+                                  props.onFollowingProgress(false, user.id);
+                                })
+                            }}
+                            disabled={props.followingProgress.some(elem => elem === user.id) ? 'disabled' : null}
+                            >
                       Подписаться
                     </button>
                 }

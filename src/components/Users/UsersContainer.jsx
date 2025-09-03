@@ -1,18 +1,17 @@
 import { connect } from "react-redux";
-import { follow, setUsers, unFollow, setCurrentPage, setTotalUsersCount, onChangeQuantityOnPage, onIsFetching } from "../../redux/users-reducer";
+import { follow, setUsers, unFollow, setCurrentPage, setTotalUsersCount, onChangeQuantityOnPage, onIsFetching, onFollowingProgress } from "../../redux/users-reducer";
 import React from "react";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import { getPageChange, getPageSize, getUsers } from "../../api/api";
+import { usersAPI } from "../../api/api";
 
 
 class UsersContainerComponent extends React.Component {
-  // debugger
   componentDidMount() {
     if (this.props.users.length === 0) {
       this.props.onIsFetching(true);
       
-      getUsers(this.props.currentPage, this.props.pageSize).then((data) => {//getUsers находится в api.js
+      usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then((data) => {//getUsers находится в api.js
         this.props.onIsFetching(false);
 
         // console.log(data);
@@ -28,7 +27,7 @@ class UsersContainerComponent extends React.Component {
   console.log(this.props.users.length);
     this.props.setCurrentPage(page);
 
-    getPageChange(page, this.props.pageSize).then((data) => {//getPageChanges находится в api.js
+    usersAPI.getPageChange(page, this.props.pageSize).then((data) => {//getPageChanges находится в api.js
 
       this.props.onIsFetching(false);
 
@@ -42,7 +41,7 @@ class UsersContainerComponent extends React.Component {
     this.props.onIsFetching(true);
 
     // this.props.setCurrentPage(page);
-    getPageSize(pageSize).then((data) => {//getPageSize находится в api.js
+    usersAPI.getPageSize(pageSize).then((data) => {//getPageSize находится в api.js
 
       this.props.onIsFetching(false);
 
@@ -66,6 +65,8 @@ class UsersContainerComponent extends React.Component {
               unFollow={this.props.unFollow}
               onChangeQuantityOnPage={this.props.onChangeQuantityOnPage}
               addNewQuantityUsers={this.addNewQuantityUsers}
+              followingProgress={this.props.followingProgress}
+              onFollowingProgress={this.props.onFollowingProgress}
         />
       </>
     )
@@ -80,6 +81,7 @@ const mapStateToProps = (state) => {
     totalUsersCount: state.usersPage.totalUsersCount,
     currentPage: state.usersPage.currentPage,
     isFetching: state.usersPage.isFetching,
+    followingProgress: state.usersPage.followingProgress
   }
 }
 
@@ -90,7 +92,8 @@ const mapDispatchToProps = {
     setCurrentPage,
     setTotalUsersCount,
     onChangeQuantityOnPage,
-    onIsFetching
+    onIsFetching,
+    onFollowingProgress
   }
 
 const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersContainerComponent);
