@@ -53,10 +53,9 @@ const Users = (props) => {
                   </div>
                 </NavLink>
                 {user.followed
-                  ? <button className={props.followingProgress.some((item) => item === user.id) ? `${s.followBtn} ${s.disabledBtn}` : s.followBtn} 
+                  ? <button className={props.followingProgress.some(item => item === user.id) ? `${s.followBtn} ${s.disabledBtn}` : s.followBtn} 
                             onClick={() => {
-                              console.log(user.followed)
-                              props.onFollowingProgress(user.id, true);
+                              props.onFollowingProgress(true, user.id);
                               axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
                                 {
                                   withCredentials: true,
@@ -73,18 +72,16 @@ const Users = (props) => {
                                   if (response.data.resultCode === 0) {
                                     props.unFollow(user.id);
                                   }
-                                  
-                                  props.onFollowingProgress(user.id, false);
+                                  props.onFollowingProgress(false, user.id)
                                 })
-                            }}
-                            disabled={props.followingProgress.some((item) => item === user.id) ? 'disabled' : null} 
+                            }} 
+                            disabled={props.followingProgress.some(item => item === user.id)}
                             >
                       Отписаться
                     </button>
-                  : <button className={props.followingProgress.some((item) => item === user.id) ? `${s.followBtn} ${s.disabledBtn}` : s.followBtn} 
+                  : <button className={props.followingProgress.some(item => item === user.id) ? `${s.followBtn} ${s.disabledBtn}` : s.followBtn} 
                             onClick={() => {
-                              console.log(user.followed)
-                              props.onFollowingProgress(user.id, true);
+                              props.onFollowingProgress(true, user.id)
                               axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {},
                                 {
                                   withCredentials: true,
@@ -101,11 +98,10 @@ const Users = (props) => {
                                   if (response.data.resultCode === 0) {
                                     props.follow(user.id);
                                   }
-
-                                  props.onFollowingProgress(user.id, false);
+                                  props.onFollowingProgress(false, user.id)
                                 })
                             }}
-                            disabled={props.followingProgress.some((item) => item === user.id) ? 'disabled' : null}
+                            disabled={props.followingProgress.some(item => item === user.id)}
                             >
                       Подписаться
                     </button>
