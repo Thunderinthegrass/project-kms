@@ -1,3 +1,5 @@
+import { usersAPI } from "../api/api";
+
 const ADD_USERS = "ADD-USERS";
 const SET_USERS = "SET-USERS";
 
@@ -77,5 +79,19 @@ const usersReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+//thunk
+export const getUsersThunkCreator = (currentPage = 1, pageSize) => {
+  return (dispatch) => {
+    dispatch(onIsFetching(true));
+          
+    usersAPI.getUsers(currentPage, pageSize).then((data) => {//getUsers находится в api.js
+      dispatch(onIsFetching(false));
+      dispatch(setUsers(data.items));
+      dispatch(setTotalUsersCount(data.totalCount - 27500));//приходит слишком много страниц, таким образом их количество уменьшается в 500 раз
+      // this.props.setTotalUsersCount(response.data.totalCount);//приходят все данные
+    })
+  }
+}
 
 export default usersReducer;

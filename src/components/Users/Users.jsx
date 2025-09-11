@@ -3,6 +3,7 @@ import s from "./Users.module.scss";
 import userImage from "../../assets/images.png";
 import {NavLink} from "react-router-dom";
 import axios from 'axios';
+import { key } from '../../dat';
 
 const Users = (props) => {
   // debugger
@@ -60,7 +61,7 @@ const Users = (props) => {
                                 {
                                   withCredentials: true,
                                   headers: {
-                                    'API-KEY': '6c488209-dce2-4433-a8ed-e59e78351743',
+                                    'API-KEY': key,
                                   }
                                 }).then((response) => {
                                   // console.log(response)
@@ -86,7 +87,7 @@ const Users = (props) => {
                                 {
                                   withCredentials: true,
                                   headers: {
-                                    'API-KEY': '6c488209-dce2-4433-a8ed-e59e78351743',
+                                    'API-KEY': key,
                                   }
                                 }).then((response) => {
                                   // console.log(response.data)
