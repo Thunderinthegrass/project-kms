@@ -2,8 +2,7 @@ import React from 'react';
 import s from "./Users.module.scss";
 import userImage from "../../assets/images.png";
 import {NavLink} from "react-router-dom";
-import axios from 'axios';
-import { key } from '../../dat';
+import { usersAPI } from '../../api/api';
 
 const Users = (props) => {
   // debugger
@@ -56,25 +55,16 @@ const Users = (props) => {
                 {user.followed
                   ? <button className={props.followingProgress.some(item => item === user.id) ? `${s.followBtn} ${s.disabledBtn}` : s.followBtn} 
                             onClick={() => {
-                              props.onFollowingProgress(true, user.id);
-                              axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-                                {
-                                  withCredentials: true,
-                                  headers: {
-                                    'API-KEY': key,
-                                  }
-                                }).then((response) => {
-                                  // console.log(response)
-                                  // console.log(response.data)
-                                  // console.log(response.data.resultCode)
-                                  // console.log(user)
-                                  // console.log(user.followed)
-
-                                  if (response.data.resultCode === 0) {
-                                    props.unFollow(user.id);
-                                  }
-                                  props.onFollowingProgress(false, user.id)
-                                })
+                              // props.onFollowingProgress(true, user.id);
+                              
+                              //   usersAPI.getUnfollow(user.id).then((response) => {
+                                  
+                              //     if (response.data.resultCode === 0) {
+                              //       props.unFollow(user.id);
+                              //     }
+                              //     props.onFollowingProgress(false, user.id)
+                              //   })
+                              props.unfollowThunkCreator(user.id);
                             }} 
                             disabled={props.followingProgress.some(item => item === user.id)}
                             >
@@ -82,25 +72,18 @@ const Users = (props) => {
                     </button>
                   : <button className={props.followingProgress.some(item => item === user.id) ? `${s.followBtn} ${s.disabledBtn}` : s.followBtn} 
                             onClick={() => {
-                              props.onFollowingProgress(true, user.id)
-                              axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {},
-                                {
-                                  withCredentials: true,
-                                  headers: {
-                                    'API-KEY': key,
-                                  }
-                                }).then((response) => {
-                                  // console.log(response.data)
-                                  // console.log(response.data.resultCode)
-                                  // console.log(user)
-                                  // console.log(user.followed)
-                                  console.log(props.followingProgress)
+                              // props.onFollowingProgress(true, user.id)
+                              
+                              // usersAPI.getFollow(user.id).then((response) => {
+                                  
+                              //     console.log(props.followingProgress)
 
-                                  if (response.data.resultCode === 0) {
-                                    props.follow(user.id);
-                                  }
-                                  props.onFollowingProgress(false, user.id)
-                                })
+                              //     if (response.data.resultCode === 0) {
+                              //       props.follow(user.id);
+                              //     }
+                              //     props.onFollowingProgress(false, user.id)
+                              //   })
+                              props.followThunkCreator(user.id)
                             }}
                             disabled={props.followingProgress.some(item => item === user.id)}
                             >

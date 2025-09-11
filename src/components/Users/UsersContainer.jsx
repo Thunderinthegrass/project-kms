@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { follow, unFollow, setCurrentPage, onChangeQuantityOnPage, onFollowingProgress, getUsersThunkCreator } from "../../redux/users-reducer";
+import { follow, unFollow, setCurrentPage, onChangeQuantityOnPage, onFollowingProgress, getUsersThunkCreator, unfollowThunkCreator, followThunkCreator } from "../../redux/users-reducer";
 import React from "react";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
@@ -59,18 +59,17 @@ class UsersContainerComponent extends React.Component {
     return (
       <>
         { this.props.isFetching ? <Preloader /> : null }
-        <Users componentDidMount={this.componentDidMount}
+        <Users 
               onPageChanged={this.onPageChanged}
               users={this.props.users}
               pageSize={this.props.pageSize}
               totalUsersCount={this.props.totalUsersCount}
               currentPage={this.props.currentPage}
-              follow={this.props.follow}
-              unFollow={this.props.unFollow}
               onChangeQuantityOnPage={this.props.onChangeQuantityOnPage}
               addNewQuantityUsers={this.addNewQuantityUsers}
               followingProgress={this.props.followingProgress}
-              onFollowingProgress={this.props.onFollowingProgress}
+              unfollowThunkCreator={this.props.unfollowThunkCreator}
+              followThunkCreator={this.props.followThunkCreator}
         />
       </>
     )
@@ -95,7 +94,9 @@ const mapDispatchToProps = {
     setCurrentPage,
     onChangeQuantityOnPage,
     onFollowingProgress,
-    getUsers: getUsersThunkCreator
+    getUsers: getUsersThunkCreator,
+    unfollowThunkCreator,
+    followThunkCreator
   }
 
 const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersContainerComponent);
