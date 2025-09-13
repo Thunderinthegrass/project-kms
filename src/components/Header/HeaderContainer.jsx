@@ -2,23 +2,26 @@ import axios from 'axios'
 import React, { Component } from 'react'
 import Header from './Header'
 import s from "./HeaderContainer.module.css";
-import { userData }from './../../redux/auth-reducer';
+import { userData, userDataThunkCreator }from './../../redux/auth-reducer';
 import { connect } from 'react-redux';
+import { usersAPI } from '../../api/api';
 
 class HeaderContainerComponent extends Component {
   componentDidMount() {
-    axios.get('https://social-network.samuraijs.com/api/1.0/auth/me', {withCredentials: true,}).then(response => {
-      // console.log(response.data);
-      const data = response.data;
-      this.props.userData(data.data.id, data.data.email, data.data.login, data.resultCode);
-      // console.log(this.props.authData);
-    })
+    // axios.get('https://social-network.samuraijs.com/api/1.0/auth/me', {withCredentials: true,}).then(response => {
+    //   // console.log(response.data);
+    //   const data = response.data;
+    //   this.props.userData(data.data.id, data.data.email, data.data.login, data.resultCode);
+    //   // console.log(this.props.authData);
+    // })
+    // usersAPI.getUserData().then(data => this.props.userData(data.data.id, data.data.email, data.data.login, data.resultCode))
+    this.props.userDataThunkCreator();
   }
 
   render() {
     return (
       <div className={s.headerContainer}>
-        <Header {...this.props}/>
+        <Header authData={this.props.authData} />
       </div>
     )
   }
@@ -31,7 +34,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  userData,
+  userDataThunkCreator,
+  userData
 }
 
 const HeaderContainer = connect(mapStateToProps, mapDispatchToProps) (HeaderContainerComponent);

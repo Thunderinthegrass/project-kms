@@ -1,3 +1,5 @@
+import { usersAPI } from "../api/api";
+
 const ADD_POST = "ADD-POST";
 const ADD_NEW_POST_TEXT = "ADD-NEW-POST-TEXT";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
@@ -47,5 +49,14 @@ const profileReducer = (state = initialState, action) => {
       default: return state;
   }
 };
+
+export const getUserProfileThunkCreator = (userId) => {
+  return (dispatch) => {
+    usersAPI.getUserProfile(userId).then((response) => {//если передается, то отправляем запрос и отрисовываем нужного пользователя
+  
+          dispatch(setUserProfile(response.data));
+        })
+  }
+}
 
 export default profileReducer;

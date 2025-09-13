@@ -1,9 +1,10 @@
 import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {addNewPostText, addPost, setUserProfile} from "../../redux/profile-reduser";
+import {addNewPostText, addPost, getUserProfileThunkCreator} from "../../redux/profile-reduser";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { usersAPI } from "../../api/api";
 
 function withRouter(WrappedComponent) {
   return (props) => {//проверяем, передается ли параметр userId, и если нет, то ничего не делаем.
@@ -18,12 +19,13 @@ class ProfileContainerComponent extends React.Component {
   componentDidMount() {
 
     if (this.props.match.params.userId) {//проверяем, передается ли параметр userId, и если нет, то ничего не делаем.
-      axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${this.props.match.params.userId}`).then((response) => {//если передается, то отправляем запрос и отрисовываем нужного пользователя
+      // usersAPI.getUserProfile(this.props.match.params.userId).then((response) => {//если передается, то отправляем запрос и отрисовываем нужного пользователя
 
-        this.props.setUserProfile(response.data);
-        // console.log(response.data);
-        console.log(this.props.match.params.userId);
-      })
+      //   this.props.setUserProfile(response);
+      //   // console.log(response.data);
+      //   console.log(this.props.match.params.userId);
+      // })
+      this.props.getUserProfileThunkCreator(this.props.match.params.userId);
     }
       // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${this.props.match.params.userId}`).then((response) => {
 
@@ -52,7 +54,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     addNewPostText,
     addPost,
-    setUserProfile,
+    getUserProfileThunkCreator
 }
 
 const ProfileContainerComponentWithUrl = withRouter(ProfileContainerComponent);

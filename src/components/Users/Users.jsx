@@ -70,7 +70,7 @@ const Users = (props) => {
                             >
                       Отписаться
                     </button>
-                  : <button className={props.followingProgress.some(item => item === user.id) ? `${s.followBtn} ${s.disabledBtn}` : s.followBtn} 
+                  : <button className={props.followingProgress.some(item => item === user.id) ? `${s.followBtn} ${s.disabledBtn}` : s.followBtn}
                             onClick={() => {
                               // props.onFollowingProgress(true, user.id)
                               

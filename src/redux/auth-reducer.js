@@ -1,3 +1,5 @@
+import { usersAPI } from "../api/api";
+
 const SET_USER_DATA = 'SET_USER_DATA';
 
 const initialState = {
@@ -18,6 +20,15 @@ const authReducer = (state = initialState, action) => {
   }
 }
 
-export const userData = (userId, email, login, isAuth) => ({type: SET_USER_DATA, data: {userId, login, email, isAuth}});
+export const userData = (userId, login, email, isAuth) => ({type: SET_USER_DATA, data: {userId, login, email, isAuth}});
+
+export const userDataThunkCreator = () => {
+  return (dispatch) => {
+    usersAPI.getUserData().then(response => {
+      const data = response;
+      dispatch(userData(data.data.id, data.data.login, data.data.email, data.resultCode))//resultCode находится в объекте ответа, остальные данные находятся в объекте data, вложенном в объект ответа
+    });
+  }
+}
 
 export default authReducer;
