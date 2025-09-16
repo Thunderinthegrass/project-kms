@@ -13,7 +13,7 @@ const instance = axios.create({
 export const usersAPI = {
   getUsers: (currentPage = 1, pageSize = 3) => {
     return instance.get(`users?page=${currentPage}&count=${pageSize}`)
-    .then(response => response.data)//чтобы в компонент не передавать весь ответ с кучей данных, вычленяем из ответа тшолько нужные нам данные, и в компонент передаем толькл их
+    .then(response => response.data)//чтобы в компонент не передавать весь ответ с кучей данных, вычленяем из ответа тшолько нужные нам данные, и в компонент передаем толькj их
   },
   getPageChange: (page, pageSize) => {
     return instance.get(`users?page=${page}&count=${pageSize}`)
@@ -29,13 +29,16 @@ export const usersAPI = {
   getUnfollow: (userId) => {
     return instance.delete(`follow/${userId}`)
   },
-  getUserData: () => {
-    return instance.get(`auth/me`)
-    .then(response => response.data)
-  },
   getUserProfile: (userId) => {
     return instance.get(`profile/${userId}`)
-    .then(response => response)
+    // .then(response => response)
   }
+}
+
+export const authAPI = {
+  getUserData() {
+    return instance.get(`auth/me`)
+    // .then(response => response.data)
+  },
 }
 

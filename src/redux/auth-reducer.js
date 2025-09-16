@@ -1,4 +1,4 @@
-import { usersAPI } from "../api/api";
+import { authAPI } from "../api/api";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 
@@ -6,7 +6,8 @@ const initialState = {
   userId: null,
   login: null,
   email: null,
-  isAuth: 1,
+  // isAuth: 1,
+  isAuth: false,
 }
 
 const authReducer = (state = initialState, action) => {
@@ -14,7 +15,8 @@ const authReducer = (state = initialState, action) => {
     case SET_USER_DATA:
       return {
         ...state,
-        ...action.data
+        ...action.data,
+        isAuth: true
       }
     default: return state;
   }
@@ -22,11 +24,22 @@ const authReducer = (state = initialState, action) => {
 
 export const userData = (userId, login, email, isAuth) => ({type: SET_USER_DATA, data: {userId, login, email, isAuth}});
 
+// export const userDataThunkCreator = () => {
+//   return (dispatch) => {
+//     authAPI.getUserData().then(response => {
+//       const data = response.data;
+//       dispatch(userData(data.data.id, data.data.login, data.data.email, data.resultCode))//resultCode находится в объекте ответа, остальные данные находятся в объекте data, вложенном в объект ответа
+//     });
+//   }
+// }
+
 export const userDataThunkCreator = () => {
   return (dispatch) => {
-    usersAPI.getUserData().then(response => {
-      const data = response;
-      dispatch(userData(data.data.id, data.data.login, data.data.email, data.resultCode))//resultCode находится в объекте ответа, остальные данные находятся в объекте data, вложенном в объект ответа
+    authAPI.getUserData().then(response => {
+      if (response.data.resultCode === 0) {
+        const data = response.data;
+        dispatch(userData(data.data.id, data.data.login, data.data.email))//resultCode находится в объекте ответа, остальные данные находятся в объекте data, вложенном в объект ответа
+      }
     });
   }
 }

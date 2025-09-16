@@ -14,7 +14,7 @@ const Header = (props) => {
         />
       </div>
       <NavLink className={s.loginLink} to={`${props.authData.isAuth === 0 ? '/' : '/Music'}` }>
-        {props.authData.isAuth === 0 ? props.authData.login : 'Login'}
+        {props.authData.isAuth ? props.authData.login : 'Login'}
       </NavLink>
     </header>
   );

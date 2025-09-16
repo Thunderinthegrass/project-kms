@@ -1,10 +1,8 @@
-import axios from 'axios'
 import React, { Component } from 'react'
 import Header from './Header'
 import s from "./HeaderContainer.module.css";
 import { userData, userDataThunkCreator }from './../../redux/auth-reducer';
 import { connect } from 'react-redux';
-import { usersAPI } from '../../api/api';
 
 class HeaderContainerComponent extends Component {
   componentDidMount() {

@@ -11,6 +11,7 @@ import FriendsContainer from "./components/Navbar/Friends/FriendsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
 
 const App = (props) => {
   return (
@@ -28,6 +29,7 @@ const App = (props) => {
             <Route path="/FriendPage" element={<FriendPage />} />
             <Route path="/Friends" element={<FriendsContainer />} />
             <Route path="/Users" element={<UsersContainer />} />
+            <Route path="/Login" element={<Login />} />
           </Routes>
         </div>
       </div>

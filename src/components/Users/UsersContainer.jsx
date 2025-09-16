@@ -3,55 +3,21 @@ import { follow, unFollow, setCurrentPage, onChangeQuantityOnPage, onFollowingPr
 import React from "react";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import { usersAPI } from "../../api/api";
 
 
 class UsersContainerComponent extends React.Component {
   componentDidMount() {
     if (this.props.users.length === 0) {
-      // this.props.onIsFetching(true);
-      
-      // usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then((data) => {//getUsers находится в api.js
-      //   this.props.onIsFetching(false);
-
-      //   // console.log(data);
-      //   this.props.setUsers(data.items);
-      //   this.props.setTotalUsersCount(data.totalCount - 27500);//приходит слишком много страниц, таким образом их количество уменьшается в 500 раз
-      //   // this.props.setTotalUsersCount(response.data.totalCount);//приходят все данные
-      // })
       this.props.getUsers(this.props.currentPage, this.props.pageSize);
     }
   }
 
   onPageChanged = (page) => {
-  //   this.props.onIsFetching(true);
-  // console.log(this.props.users.length);
-  //   this.props.setCurrentPage(page);
-
-  //   usersAPI.getPageChange(page, this.props.pageSize).then((data) => {//getPageChanges находится в api.js
-
-  //     this.props.onIsFetching(false);
-
-  //     // console.log(this.props.pageSize);
-  //     // console.log(response);
-  //     this.props.setUsers(data.items);
-  //   });
     this.props.getUsers(page, this.props.pageSize);
     this.props.setCurrentPage(page);
   }
 
   addNewQuantityUsers = (pageSize) => {
-    // this.props.onIsFetching(true);
-
-    // // this.props.setCurrentPage(page);
-    // usersAPI.getPageSize(pageSize).then((data) => {//getPageSize находится в api.js
-
-    //   this.props.onIsFetching(false);
-
-    //   // console.log(this.props.pageSize);
-    //   // console.log(data);
-    //   this.props.setUsers(data.items);
-    // });
     this.props.getUsers(this.props.currentPage, pageSize);
   }
 

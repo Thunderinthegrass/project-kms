@@ -7,6 +7,7 @@ import MyPosts from "./MyPosts/MyPosts";
 
 const Profile = (props) => {
   // debugger
+  // alert(props.isAuth)
   return (
     <div>
       <div className={s.banner}>

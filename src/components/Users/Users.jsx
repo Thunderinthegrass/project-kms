@@ -2,7 +2,6 @@ import React from 'react';
 import s from "./Users.module.scss";
 import userImage from "../../assets/images.png";
 import {NavLink} from "react-router-dom";
-import { usersAPI } from '../../api/api';
 
 const Users = (props) => {
   // debugger
@@ -55,15 +54,6 @@ const Users = (props) => {
                 {user.followed
                   ? <button className={props.followingProgress.some(item => item === user.id) ? `${s.followBtn} ${s.disabledBtn}` : s.followBtn} 
                             onClick={() => {
-                              // props.onFollowingProgress(true, user.id);
-                              
-                              //   usersAPI.getUnfollow(user.id).then((response) => {
-                                  
-                              //     if (response.data.resultCode === 0) {
-                              //       props.unFollow(user.id);
-                              //     }
-                              //     props.onFollowingProgress(false, user.id)
-                              //   })
                               props.unfollowThunkCreator(user.id);
                             }} 
                             disabled={props.followingProgress.some(item => item === user.id)}
@@ -72,17 +62,6 @@ const Users = (props) => {
                     </button>
                   : <button className={props.followingProgress.some(item => item === user.id) ? `${s.followBtn} ${s.disabledBtn}` : s.followBtn}
                             onClick={() => {
-                              // props.onFollowingProgress(true, user.id)
-                              
-                              // usersAPI.getFollow(user.id).then((response) => {
-                                  
-                              //     console.log(props.followingProgress)
-
-                              //     if (response.data.resultCode === 0) {
-                              //       props.follow(user.id);
-                              //     }
-                              //     props.onFollowingProgress(false, user.id)
-                              //   })
                               props.followThunkCreator(user.id)
                             }}
                             disabled={props.followingProgress.some(item => item === user.id)}

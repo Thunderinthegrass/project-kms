@@ -2,9 +2,7 @@ import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {addNewPostText, addPost, getUserProfileThunkCreator} from "../../redux/profile-reduser";
-import axios from "axios";
-import { useParams } from "react-router-dom";
-import { usersAPI } from "../../api/api";
+import { Navigate, useParams } from "react-router-dom";
 
 function withRouter(WrappedComponent) {
   return (props) => {//проверяем, передается ли параметр userId, и если нет, то ничего не делаем.
@@ -19,23 +17,14 @@ class ProfileContainerComponent extends React.Component {
   componentDidMount() {
 
     if (this.props.match.params.userId) {//проверяем, передается ли параметр userId, и если нет, то ничего не делаем.
-      // usersAPI.getUserProfile(this.props.match.params.userId).then((response) => {//если передается, то отправляем запрос и отрисовываем нужного пользователя
-
-      //   this.props.setUserProfile(response);
-      //   // console.log(response.data);
-      //   console.log(this.props.match.params.userId);
-      // })
       this.props.getUserProfileThunkCreator(this.props.match.params.userId);
     }
-      // axios.get(`https://social-network.samuraijs.com/api/1.0/profile/${this.props.match.params.userId}`).then((response) => {
-
-      //   this.props.setUserProfile(response.data);
-      //   // console.log(response.data);
-      //   console.log(this.props.match.params.userId);
-      // })
   }
 
   render() {
+    console.log('авторизация ' + this.props.isAuth)
+    // if (!this.props.isAuth) return <Navigate to={"/login"} />
+
     return (
       <Profile {...this.props}/>//если из контейнерной компоненты прокидываем все пропсы, которые в нее приходят, то можно писать так
     );
@@ -48,6 +37,7 @@ const mapStateToProps = (state) => {
     posts: state.profilePage.posts,
     newPostText: state.profilePage.newPostText,
     userData: state.profilePage.userData,
+    isAuth: state.auth.isAuth
   }
 }
 
@@ -57,7 +47,13 @@ const mapDispatchToProps = {
     getUserProfileThunkCreator
 }
 
-const ProfileContainerComponentWithUrl = withRouter(ProfileContainerComponent);
+const authRedirectComponent = (props) => {//HOC
+  if (!props.isAuth) return <Navigate to={"/login"} />
+  return <ProfileContainerComponent {...props} />
+}
+
+// const ProfileContainerComponentWithUrl = withRouter(ProfileContainerComponent);//было
+const ProfileContainerComponentWithUrl = withRouter(authRedirectComponent);//стало
 
 const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(ProfileContainerComponentWithUrl);
 
