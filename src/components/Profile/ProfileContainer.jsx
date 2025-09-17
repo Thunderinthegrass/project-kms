@@ -2,7 +2,9 @@ import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {addNewPostText, addPost, getUserProfileThunkCreator} from "../../redux/profile-reduser";
-import { Navigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { compose } from 'redux';
 
 function withRouter(WrappedComponent) {
   return (props) => {//проверяем, передается ли параметр userId, и если нет, то ничего не делаем.
@@ -22,8 +24,7 @@ class ProfileContainerComponent extends React.Component {
   }
 
   render() {
-    console.log('авторизация ' + this.props.isAuth)
-    // if (!this.props.isAuth) return <Navigate to={"/login"} />
+    console.log('авторизация ' + this.props.isAuth);
 
     return (
       <Profile {...this.props}/>//если из контейнерной компоненты прокидываем все пропсы, которые в нее приходят, то можно писать так
@@ -31,13 +32,13 @@ class ProfileContainerComponent extends React.Component {
   }
 }
 
+
 const mapStateToProps = (state) => {
   // debugger
   return {
     posts: state.profilePage.posts,
     newPostText: state.profilePage.newPostText,
     userData: state.profilePage.userData,
-    isAuth: state.auth.isAuth
   }
 }
 
@@ -47,14 +48,18 @@ const mapDispatchToProps = {
     getUserProfileThunkCreator
 }
 
-const authRedirectComponent = (props) => {//HOC
-  if (!props.isAuth) return <Navigate to={"/login"} />
-  return <ProfileContainerComponent {...props} />
-}
+let composed = compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withRouter,
+  withAuthRedirect
+)
 
-// const ProfileContainerComponentWithUrl = withRouter(ProfileContainerComponent);//было
-const ProfileContainerComponentWithUrl = withRouter(authRedirectComponent);//стало
+// let authRedirectComponent = withAuthRedirect(ProfileContainerComponent);//withAuthRedirect находится в hoc/withAuthRedirect, это контейнерный компонент
 
-const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(ProfileContainerComponentWithUrl);
+// const ProfileContainerComponentWithUrl = withRouter(authRedirectComponent);
 
-export default ProfileContainer;
+// const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(ProfileContainerComponentWithUrl);
+
+// export default ProfileContainer;
+
+export default composed(ProfileContainerComponent);

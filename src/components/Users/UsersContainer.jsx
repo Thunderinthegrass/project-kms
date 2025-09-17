@@ -3,6 +3,8 @@ import { follow, unFollow, setCurrentPage, onChangeQuantityOnPage, onFollowingPr
 import React from "react";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { compose } from 'redux';
 
 
 class UsersContainerComponent extends React.Component {
@@ -63,8 +65,19 @@ const mapDispatchToProps = {
     getUsers: getUsersThunkCreator,
     unfollowThunkCreator,
     followThunkCreator
-  }
+}
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersContainerComponent);
+//сначала было так
+// let withRedirect = withAuthRedirect(UsersContainerComponent);
+// const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(withRedirect);//Более громоздкая запись
 
-export default UsersContainer;
+//потом стало так
+// withAuthRedirect()
+
+// export default withAuthRedirect(connect(mapStateToProps, mapDispatchToProps)(UsersContainerComponent));//hoc withAuthComponent принимает в качестве параметра usersContainerComponent, к которому уже законнекчкн стейт
+
+//потом так
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthRedirect
+)(UsersContainerComponent);
