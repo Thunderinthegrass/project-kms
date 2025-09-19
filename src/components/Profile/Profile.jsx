@@ -21,7 +21,6 @@ const Profile = (props) => {
           src={banner2}
           alt=""
         />
-
       </div>
       <ProfileInfo userData={props.userData} />
       <MyPosts posts={ props.posts }

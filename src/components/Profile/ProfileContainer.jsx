@@ -9,7 +9,7 @@ import { compose } from 'redux';
 function withRouter(WrappedComponent) {
   return (props) => {//проверяем, передается ли параметр userId, и если нет, то ничего не делаем.
     const match = {params: useParams()}; //Здесь каким-то образом появляется айдишник, переданный в NavLink при отрисовке
-    console.log(match);
+    // console.log(match);
     return <WrappedComponent {...props} match={match} />;
   }
 }
@@ -18,13 +18,13 @@ class ProfileContainerComponent extends React.Component {
 
   componentDidMount() {
 
-    if (this.props.match.params.userId) {//проверяем, передается ли параметр userId, и если нет, то ничего не делаем.
+    // if (this.props.match.params.userId) {//проверяем, передается ли параметр userId, и если нет, то ничего не делаем.//17.09.2025 закомментировал эту проверку. Зачем - см. в тетрадке
       this.props.getUserProfileThunkCreator(this.props.match.params.userId);
-    }
+    // }//17.09.2025 закомментировал эту проверку. Зачем - см. в тетрадке
   }
 
   render() {
-    console.log('авторизация ' + this.props.isAuth);
+    // console.log('авторизация ' + this.props.isAuth);
 
     return (
       <Profile {...this.props}/>//если из контейнерной компоненты прокидываем все пропсы, которые в нее приходят, то можно писать так
@@ -51,7 +51,7 @@ const mapDispatchToProps = {
 let composed = compose(
   connect(mapStateToProps, mapDispatchToProps),
   withRouter,
-  withAuthRedirect
+  // withAuthRedirect
 )
 
 // let authRedirectComponent = withAuthRedirect(ProfileContainerComponent);//withAuthRedirect находится в hoc/withAuthRedirect, это контейнерный компонент

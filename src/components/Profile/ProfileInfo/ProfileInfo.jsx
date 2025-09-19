@@ -2,6 +2,8 @@ import React from "react";
 import s from "./ProfileInfo.module.css";
 import leopold from "../../../assets/leopold.jpg";
 import Preloader from "../../common/Preloader/Preloader";
+// import ProfileStatus from "./ProfileStatus/ProfileStatus";
+import ProfileStatusClass from "./ProfileStatus/ProfileStatusClass";
 
 const ProfileInfo = (props) => {
   // debugger
@@ -18,10 +20,12 @@ const ProfileInfo = (props) => {
         />
         </div>
         <div className={s.userName}>
-          Кот Леопольд
+          {/* Кот Леопольд */}
           {/*<p>{props.userData.aboutMe}</p>*/}
           {/*<p>{props.userData.lookingForAJobDescription}</p>*/}
           <p>{props.userData.fullName}</p>
+          {/* <ProfileStatus status={"Ребята, давайте жить дружно"} /> */}
+          <ProfileStatusClass status={"Ребята, давайте жить дружно"} />
         </div>
       </div>
   )

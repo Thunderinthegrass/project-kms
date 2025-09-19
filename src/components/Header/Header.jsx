@@ -13,7 +13,7 @@ const Header = (props) => {
           alt="Логотип"
         />
       </div>
-      <NavLink className={s.loginLink} to={`${props.authData.isAuth === 0 ? '/' : 'https://social-network.samuraijs.com/api/1.0/'}` }>
+      <NavLink target="_blank" className={s.loginLink} to={`${props.authData.isAuth === 0 ? '/' : 'https://social-network.samuraijs.com/api/1.0/'}` }>
         {props.authData.isAuth ? props.authData.login : 'Login'}
       </NavLink>
     </header>
