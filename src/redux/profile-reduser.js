@@ -3,10 +3,13 @@ import { usersAPI } from "../api/api";
 const ADD_POST = "ADD-POST";
 const ADD_NEW_POST_TEXT = "ADD-NEW-POST-TEXT";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
+const SET_STATUS = "SET_STATUS";
 
 export const addNewPostText = (text) => ({type: ADD_NEW_POST_TEXT, text: text});
 export const addPost = () => ({type: ADD_POST});
 export const setUserProfile = (data) => ({type: SET_USER_PROFILE, data});
+
+export const setStatus = (data) => ({type: SET_STATUS, data});
 
 let initialState = {
       posts: [
@@ -17,6 +20,7 @@ let initialState = {
       ],
       newPostText: "",
       userData: {},//можно в качестве начального значения сделать null, тогда в эту переменную будет приходить объект, и можно будет его не копировать
+      status: ''
     }
 
 const profileReducer = (state = initialState, action) => {
@@ -46,16 +50,39 @@ const profileReducer = (state = initialState, action) => {
       return  {
         ...state, userData: {...action.data}
       }
-      default: return state;
+    case SET_STATUS:
+      return {
+        ...state, status: action.data
+      }
+    default: return state;
   }
 };
 
+// export const getUserProfileThunkCreator = (userId = 1049) => {//если id не передается, то он равен 32562
 export const getUserProfileThunkCreator = (userId = 32562) => {//если id не передается, то он равен 32562
   return (dispatch) => {
     usersAPI.getUserProfile(userId).then((response) => {//если передается, то отправляем запрос и отрисовываем нужного пользователя
   
           dispatch(setUserProfile(response.data));
         })
+  }
+}
+
+export const updateStatusThunkCreator = (status = 'Привет') => {
+  return (dispatch) => {
+    usersAPI.updateStatus(status).then((response) => {
+      console.log("updateResponse:", response)
+      dispatch(setStatus(status))
+    })
+  }
+}
+
+export const getStatusThunkCreator = (userId = 32562) => {
+  return (dispatch) => {
+    usersAPI.getStatus(userId).then((response) => {
+      console.log(response)
+      dispatch(setStatus(response.data))
+    })
   }
 }
 

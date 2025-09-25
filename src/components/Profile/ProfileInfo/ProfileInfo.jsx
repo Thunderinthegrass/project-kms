@@ -4,6 +4,7 @@ import leopold from "../../../assets/leopold.jpg";
 import Preloader from "../../common/Preloader/Preloader";
 // import ProfileStatus from "./ProfileStatus/ProfileStatus";
 import ProfileStatusClass from "./ProfileStatus/ProfileStatusClass";
+import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
 const ProfileInfo = (props) => {
   // debugger
@@ -25,7 +26,9 @@ const ProfileInfo = (props) => {
           {/*<p>{props.userData.lookingForAJobDescription}</p>*/}
           <p>{props.userData.fullName}</p>
           {/* <ProfileStatus status={"Ребята, давайте жить дружно"} /> */}
-          <ProfileStatusClass status={"Ребята, давайте жить дружно"} />
+          {/* <ProfileStatusClass status={"Ребята, давайте жить дружно"} /> */}
+          {/* <ProfileStatusClass status={props.status} updateStatus={props.updateStatus} /> */}
+          <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
         </div>
       </div>
   )

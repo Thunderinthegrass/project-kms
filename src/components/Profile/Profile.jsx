@@ -22,7 +22,7 @@ const Profile = (props) => {
           alt=""
         />
       </div>
-      <ProfileInfo userData={props.userData} />
+      <ProfileInfo userData={props.userData} status={props.status} updateStatus={props.updateStatusThunkCreator} />
       <MyPosts posts={ props.posts }
                newPostText={ props.newPostText }
                addNewPostText={ props.addNewPostText }

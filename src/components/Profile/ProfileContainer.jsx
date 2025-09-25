@@ -1,7 +1,7 @@
 import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {addNewPostText, addPost, getUserProfileThunkCreator} from "../../redux/profile-reduser";
+import {addNewPostText, addPost, getStatusThunkCreator, getUserProfileThunkCreator, updateStatusThunkCreator} from "../../redux/profile-reduser";
 import { useParams } from "react-router-dom";
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from 'redux';
@@ -21,6 +21,7 @@ class ProfileContainerComponent extends React.Component {
     // if (this.props.match.params.userId) {//проверяем, передается ли параметр userId, и если нет, то ничего не делаем.//17.09.2025 закомментировал эту проверку. Зачем - см. в тетрадке
       this.props.getUserProfileThunkCreator(this.props.match.params.userId);
     // }//17.09.2025 закомментировал эту проверку. Зачем - см. в тетрадке
+      this.props.getStatusThunkCreator(this.props.match.params.userId, this.props.auth);
   }
 
   render() {
@@ -39,13 +40,17 @@ const mapStateToProps = (state) => {
     posts: state.profilePage.posts,
     newPostText: state.profilePage.newPostText,
     userData: state.profilePage.userData,
+    status: state.profilePage.status,
+    auth: state.auth.isAuth
   }
 }
 
 const mapDispatchToProps = {
     addNewPostText,
     addPost,
-    getUserProfileThunkCreator
+    getUserProfileThunkCreator,
+    getStatusThunkCreator,
+    updateStatusThunkCreator
 }
 
 let composed = compose(
