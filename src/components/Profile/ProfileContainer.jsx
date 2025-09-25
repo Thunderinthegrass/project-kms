@@ -3,7 +3,7 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {addNewPostText, addPost, getStatusThunkCreator, getUserProfileThunkCreator, updateStatusThunkCreator} from "../../redux/profile-reduser";
 import { useParams } from "react-router-dom";
-import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+// import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from 'redux';
 
 function withRouter(WrappedComponent) {
@@ -19,9 +19,10 @@ class ProfileContainerComponent extends React.Component {
   componentDidMount() {
 
     // if (this.props.match.params.userId) {//проверяем, передается ли параметр userId, и если нет, то ничего не делаем.//17.09.2025 закомментировал эту проверку. Зачем - см. в тетрадке
-      this.props.getUserProfileThunkCreator(this.props.match.params.userId);
+      // this.props.getUserProfileThunkCreator(this.props.match.params.userId);
+    this.props.getUserProfileThunkCreator(this.props.match.params.userId);
     // }//17.09.2025 закомментировал эту проверку. Зачем - см. в тетрадке
-      this.props.getStatusThunkCreator(this.props.match.params.userId, this.props.auth);
+    this.props.getStatusThunkCreator(this.props.match.params.userId, this.props.auth);
   }
 
   render() {

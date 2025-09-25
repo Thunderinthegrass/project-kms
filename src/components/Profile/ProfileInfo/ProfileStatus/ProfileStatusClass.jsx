@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import style from "./ProfileStatus.module.scss";
 
 export class ProfileStatusClass extends Component {
   state = {
@@ -9,7 +10,7 @@ export class ProfileStatusClass extends Component {
   activateEditMode = () => {
     this.setState({
       editMode: true,
-      status: this.props.status,
+      // status: this.props.status,
     })
   }
 
@@ -17,7 +18,10 @@ export class ProfileStatusClass extends Component {
     this.setState({
       editMode: false,
     });
-    this.props.updateStatus(this.state.status);
+    if (this.state.status !== this.props.status) {//проверяем, совпадает ли локальный стейт с пропсом, чтобы одно и то же не отправлять
+      this.props.updateStatus(this.state.status);
+      console.log('Новый статус отправлен!')
+    }
   }
 
   updateStatus = (e) => {
@@ -26,11 +30,19 @@ export class ProfileStatusClass extends Component {
     })
   }
 
+  componentDidUpdate(prevProps, prevState) {//обновляем локальный стейт, если он подтянулся в строке 7 уже после монтирования компонента, чтоб value={this.state.status} было не пустым при попытке изменить статус. То же самое я сделал в строке 13, но там обновление стейта происходило при срабатывании функции activateEditMode 
+    if (prevProps.status !== this.props.status) {
+      this.setState({
+        status: this.props.status
+      })
+    }
+  }
+
   render() {
     return (
       <div>
-        {!this.state.editMode && <span onDoubleClick={this.activateEditMode}>{this.props.status}</span>}
-        {this.state.editMode && <div><input type="text" autoFocus={true} onBlur={this.deactivateEditMode} onChange={this.updateStatus} value={this.state.status} placeholder='Введите статус'/></div>}
+        {!this.state.editMode && <span className={style.span} onDoubleClick={this.activateEditMode}>{this.props.status}</span>}
+        {this.state.editMode && <div><input className={style.input} type="text" autoFocus onBlur={this.deactivateEditMode} onChange={this.updateStatus} value={this.state.status} placeholder='Введите статус'/></div>}
         {/* <button onClick={() => this.updateStatus3('Статус')}>Жмяк</button> */}
       </div>
     )

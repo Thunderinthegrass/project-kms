@@ -19,7 +19,7 @@ let initialState = {
         { id: 4, message: "Пост", likes: 20 },
       ],
       newPostText: "",
-      userData: {},//можно в качестве начального значения сделать null, тогда в эту переменную будет приходить объект, и можно будет его не копировать
+      userData: null,//можно в качестве начального значения сделать null, тогда в эту переменную будет приходить объект, и можно будет его не копировать, а можно и пустой объект
       status: ''
     }
 
@@ -71,7 +71,7 @@ export const getUserProfileThunkCreator = (userId = 32562) => {//если id н�
 export const updateStatusThunkCreator = (status = 'Привет') => {
   return (dispatch) => {
     usersAPI.updateStatus(status).then((response) => {
-      console.log("updateResponse:", response)
+      // console.log("updateResponse:", response)
       dispatch(setStatus(status))
     })
   }
