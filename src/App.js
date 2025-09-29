@@ -12,6 +12,7 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
+import LoginFinal from "./components/LoginFinal/LoginFinal";
 
 const App = (props) => {
   return (
@@ -30,6 +31,7 @@ const App = (props) => {
             <Route path="/Friends" element={<FriendsContainer />} />
             <Route path="/Users" element={<UsersContainer />} />
             <Route path="/Login" element={<Login />} />
+            <Route path="/LoginFinal" element={<LoginFinal />} />
           </Routes>
         </div>
       </div>

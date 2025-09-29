@@ -30,6 +30,12 @@ const Navbar = (props) => {
         <li>
           <NavLink className={ ({isActive}) => isActive ? s.active : s.item } to="/Settings">Settings</NavLink>
         </li>
+        <li>
+          <NavLink className={ ({isActive}) => isActive ? s.active : s.item } to="/Login">Login</NavLink>
+        </li>
+        <li>
+          <NavLink className={ ({isActive}) => isActive ? s.active : s.item } to="/LoginFinal">LoginFinal</NavLink>
+        </li>
       </ul>
     </nav>
     {/* <Friends friends={props.state.friendsPage} /> */}

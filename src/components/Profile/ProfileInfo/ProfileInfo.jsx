@@ -3,7 +3,7 @@ import s from "./ProfileInfo.module.css";
 import leopold from "../../../assets/leopold.jpg";
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatusClass from "./ProfileStatus/ProfileStatusClass";
-import ProfileStatus from "./ProfileStatus/ProfileStatus";
+// import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
 const ProfileInfo = (props) => {
   // debugger
