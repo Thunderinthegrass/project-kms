@@ -3,7 +3,7 @@ import styles from "./LoginFinal.module.scss";
 import { Form, Field } from "react-final-form";
 
 const LoginForm = (props) => {
-
+// debugger
   const onSubmit = (values) => {
     console.log("Form values:", values);
     // Здесь будет ваша логика отправки формы
@@ -49,7 +49,7 @@ const LoginFinal = (props) => {
   return (
     <>
       <div className={styles.loginPage}>
-        <h1>Login</h1>
+        <h1>Login-final</h1>
         <LoginForm />
       </div>
     </>

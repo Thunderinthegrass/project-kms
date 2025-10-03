@@ -39,7 +39,7 @@ const mapStateToProps = (state) => {
   // debugger
   return {
     posts: state.profilePage.posts,
-    newPostText: state.profilePage.newPostText,
+    // newPostText: state.profilePage.newPostText,
     userData: state.profilePage.userData,
     status: state.profilePage.status,
     auth: state.auth.isAuth
@@ -47,7 +47,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-    addNewPostText,
+    // addNewPostText,
     addPost,
     getUserProfileThunkCreator,
     getStatusThunkCreator,
