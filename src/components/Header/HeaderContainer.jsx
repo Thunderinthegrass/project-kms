@@ -28,12 +28,13 @@ class HeaderContainerComponent extends Component {
 const mapStateToProps = (state) => {
   return {
     authData: state.auth,
+    
   }
 }
 
 const mapDispatchToProps = {
   userDataThunkCreator,
-  userData
+  // userData
 }
 
 const HeaderContainer = connect(mapStateToProps, mapDispatchToProps) (HeaderContainerComponent);

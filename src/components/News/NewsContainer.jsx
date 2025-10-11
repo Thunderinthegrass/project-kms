@@ -14,8 +14,8 @@ const mapDispatchToProps = (dispatch) => {
     updateNewNewsText: (text) => {
       dispatch(addNewNewsTextActionCreator(text))
     },
-    addNews: () => {
-      dispatch(addNewsActionCreator());
+    addNews: (news) => {
+      dispatch(addNewsActionCreator(news));
     }
   }
 }

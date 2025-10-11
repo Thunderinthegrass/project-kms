@@ -1,11 +1,9 @@
 import { usersAPI } from "../api/api";
 
 const ADD_POST = "ADD-POST";
-// const ADD_NEW_POST_TEXT = "ADD-NEW-POST-TEXT";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
 
-// export const addNewPostText = (text) => ({type: ADD_NEW_POST_TEXT, text: text});
 export const addPost = (newPost) => ({type: ADD_POST, newPost});
 export const setUserProfile = (data) => ({type: SET_USER_PROFILE, data});
 
@@ -18,7 +16,6 @@ let initialState = {
         { id: 3, message: "Пост", likes: 12 },
         { id: 4, message: "Пост", likes: 20 },
       ],
-      // newPostText: "",
       userData: null,//можно в качестве начального значения сделать null, тогда в эту переменную будет приходить объект, и можно будет его не копировать, а можно и пустой объект
       status: ''
     }
@@ -26,13 +23,6 @@ let initialState = {
 const profileReducer = (state = initialState, action) => {
   // debugger
   switch (action.type) {
-    // case ADD_NEW_POST_TEXT:
-    //   console.log("ADD_POST_TEXT");
-    //   console.log(state.newPostText);
-    //   return {// Создаем новый объект состояния
-    //     ...state,
-    //     newPostText: action.text
-    //   }
     case ADD_POST:
       const postId = state.posts.length + 1;
 
@@ -81,7 +71,7 @@ export const updateStatusThunkCreator = (status = 'Привет') => {
 export const getStatusThunkCreator = (userId = 32562) => {
   return (dispatch) => {
     usersAPI.getStatus(userId).then((response) => {
-      console.log(response)
+      // console.log(response)
       dispatch(setStatus(response.data))
     })
   }

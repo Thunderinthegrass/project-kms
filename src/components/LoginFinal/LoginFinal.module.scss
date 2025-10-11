@@ -14,7 +14,7 @@ h1{
 form{
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 25px;
 }
 .inputCheckboxWrapper{
   width: 300px;
@@ -24,14 +24,29 @@ form{
     width: auto;
   }
 }
+label{
+  position: relative;
+}
 input{
   width: 300px;
   padding: 10px;
   padding-left: 15px;
   border-radius: 5px;
   border: none;
-  outline-color: #6be0e4;
+  outline-color: transparent;
+  &[type="checkbox"]{
+    cursor: pointer;
+  }
+}
+.inputCheckboxWrapper{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  cursor: pointer;
+  width: 50%;
 }
 span{
   color: #ffffff;
+  font-size: 13px;
+  line-height: 13px;
 }

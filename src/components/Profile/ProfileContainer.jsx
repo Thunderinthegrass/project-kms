@@ -1,7 +1,7 @@
 import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {addNewPostText, addPost, getStatusThunkCreator, getUserProfileThunkCreator, updateStatusThunkCreator} from "../../redux/profile-reduser";
+import {addPost, getStatusThunkCreator, getUserProfileThunkCreator, updateStatusThunkCreator} from "../../redux/profile-reduser";
 import { useParams } from "react-router-dom";
 // import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from 'redux';
@@ -39,7 +39,6 @@ const mapStateToProps = (state) => {
   // debugger
   return {
     posts: state.profilePage.posts,
-    // newPostText: state.profilePage.newPostText,
     userData: state.profilePage.userData,
     status: state.profilePage.status,
     auth: state.auth.isAuth
@@ -47,7 +46,6 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-    // addNewPostText,
     addPost,
     getUserProfileThunkCreator,
     getStatusThunkCreator,

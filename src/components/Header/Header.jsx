@@ -1,9 +1,13 @@
 import React from "react";
 import s from './Header.module.css';
 import { NavLink } from "react-router-dom";
+import { logoutThunkCreator } from "../../redux/auth-reducer";
 
 const Header = (props) => {
   // debugger;
+  const logout = () => {
+    logoutThunkCreator()
+  }
   return (
     <header className={s.header}>
       <div className={s.logo}>
@@ -13,9 +17,10 @@ const Header = (props) => {
           alt="Логотип"
         />
       </div>
-      <NavLink target="_blank" className={s.loginLink} to={`${props.authData.isAuth === 0 ? '/' : 'https://social-network.samuraijs.com/api/1.0/'}` }>
-        {props.authData.isAuth ? props.authData.login : 'Login'}
+      <NavLink className={s.loginLink} to={`${props.authData.isAuth === 0 ? '/' : '/loginFinal'}` }>
+        {props.authData.isAuth === 0 ? props.authData.login : 'Login'}
       </NavLink>
+      {props.authData.isAuth === 0 && <button onClick={logout}>Выйти</button>}
     </header>
   );
 };

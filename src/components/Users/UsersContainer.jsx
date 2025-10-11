@@ -3,7 +3,7 @@ import { follow, unFollow, setCurrentPage, onChangeQuantityOnPage, onFollowingPr
 import React from "react";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
-import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+// import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from 'redux';
 
 
@@ -79,5 +79,5 @@ const mapDispatchToProps = {
 //потом так
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-  withAuthRedirect
+  // withAuthRedirect
 )(UsersContainerComponent);

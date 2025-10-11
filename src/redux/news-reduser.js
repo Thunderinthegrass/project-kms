@@ -2,7 +2,7 @@ const ADD_NEW_NEWS_TEXT = "ADD-NEW-NEWS-TEXT";
 const ADD_NEWS = "ADD-NEWS";
 
 export const addNewNewsTextActionCreator = (news) => ({type: ADD_NEW_NEWS_TEXT, news: news});
-export const addNewsActionCreator = () => ({type: ADD_NEWS});
+export const addNewsActionCreator = (news) => ({type: ADD_NEWS, news});
 
 let initialState = {
       newNewsText: "",
@@ -23,7 +23,7 @@ const newsReduser = (state = initialState, action) => {
     case ADD_NEWS:
       const newNews = {
         id: state.news.length + 1,
-        news: state.newNewsText,
+        news: action.news,
       }
       return {
         ...state,

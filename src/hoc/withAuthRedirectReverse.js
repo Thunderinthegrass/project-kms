@@ -7,12 +7,12 @@ const mapStateToPropsForRedirect = (state) => {
   }
 }
 
-export const withAuthRedirect = (Component) => {
+export const withAuthRedirectReverse = (Component) => {
 
   const RedirectComponent = (props) => {
     // debugger
     console.log("isAuth: " + props.isAuth)
-    if (props.isAuth === 1) return <Navigate to={"/loginFinal"} />
+    if (props.isAuth === 0) return <Navigate to={"/"} />
 
     return <Component {...props} />
   }

@@ -12,39 +12,45 @@ const instance = axios.create({
 
 export const usersAPI = {
   getUsers: (currentPage = 1, pageSize = 3) => {
-    return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+    return instance.get(`users?page=${ currentPage }&count=${ pageSize }`)
     .then(response => response.data)//чтобы в компонент не передавать весь ответ с кучей данных, вычленяем из ответа тшолько нужные нам данные, и в компонент передаем толькj их
   },
   getPageChange: (page, pageSize) => {
-    return instance.get(`users?page=${page}&count=${pageSize}`)
+    return instance.get(`users?page=${ page }&count=${ pageSize }`)
     .then(response => response.data)
   },
   getPageSize: (pageSize) => {
-    return instance.get(`users?page=${1}&count=${pageSize}`)
+    return instance.get(`users?page=${ 1 }&count=${ pageSize }`)
     .then(response => response.data)
   },
   getFollow: (userId) => {
-    return instance.post(`follow/${userId}`)
+    return instance.post(`follow/${ userId }`)
   },
   getUnfollow: (userId) => {
-    return instance.delete(`follow/${userId}`)
+    return instance.delete(`follow/${ userId }`)
   },
   getUserProfile: (userId) => {
-    return instance.get(`profile/${userId}`)
+    return instance.get(`profile/${ userId }`)
     // .then(response => response)
   },
   getStatus: (userId) => {
-    return instance.get(`profile/status/${userId}`)
+    return instance.get(`profile/status/${ userId }`)
   },
   updateStatus: (status) => {
     return instance.put(`profile/status`, { status })
-  },
+  }
 }
 
 export const authAPI = {
   getUserData() {
     return instance.get(`auth/me`)
-    // .then(response => response.data)
+    // .then(response => console.log(response))
   },
+  login: (email, password, rememberMe) => {
+    return instance.post(`/auth/login`, { email, password, rememberMe })
+  },
+  logout: () => {
+    return instance.delete(`/auth/login`)
+  }
 }
 
