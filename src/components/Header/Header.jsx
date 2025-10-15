@@ -1,6 +1,7 @@
 import React from "react";
-import s from './Header.module.css';
+import s from './Header.module.scss';
 import { NavLink } from "react-router-dom";
+// import { logoutThunkCreator } from "../../redux/auth-reducer";
 
 const Header = (props) => {
   // debugger;
@@ -13,9 +14,13 @@ const Header = (props) => {
           alt="Логотип"
         />
       </div>
-      <NavLink target="_blank" className={s.loginLink} to={`${props.authData.isAuth === 0 ? '/' : 'https://social-network.samuraijs.com/api/1.0/'}` }>
+      {/* <NavLink {...(props.authData.isAuth ? {target: "_self"} : {target: "_blank"})} className={s.loginLink} to={`${props.authData.isAuth ? '/' : 'https://social-network.samuraijs.com/api/1.0/'}` }> */}
+      <NavLink className={s.loginLink} to={`${props.authData.isAuth ? '/' : '/LoginFinal'}` }>
         {props.authData.isAuth ? props.authData.login : 'Login'}
       </NavLink>
+      {/* {props.authData.isAuth ? <button onClick={logoutThunkCreator}>Выйти</button> : ''} */}
+      {props.authData.isAuth ? <button onClick={props.logout}>Выйти</button> : <NavLink className={s.loginBtn} to={'/LoginFinal'}>Войти</NavLink>}
+      {/* <span>{`${props.authData.isAuth}`}</span> */}
     </header>
   );
 };

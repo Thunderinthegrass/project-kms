@@ -19,3 +19,15 @@
   font-weight: 600;
   font-size: 23px;
 }
+.loginBtn{
+  background: #a50153;
+  color: #ffffff;
+  padding: 10px 27px;
+  border-radius: 5px;
+  border: 2px solid #e0b1c9;
+  transition: .3s;
+  &:hover{
+    background: #860246;
+    border: 2px solid #a50153;
+  }
+}

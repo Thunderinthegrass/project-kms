@@ -16,7 +16,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         ...action.data,
-        isAuth: true
+        // isAuth: true//из-за этого тоже были проблемы
       }
     default: return state;
   }
@@ -38,9 +38,31 @@ export const userDataThunkCreator = () => {
     authAPI.getUserData().then(response => {
       if (response.data.resultCode === 0) {
         const data = response.data;
-        dispatch(userData(data.data.id, data.data.login, data.data.email))//resultCode находится в объекте ответа, остальные данные находятся в объекте data, вложенном в объект ответа
+        dispatch(userData(data.data.id, data.data.login, data.data.email, true))//resultCode находится в объекте ответа, остальные данные находятся в объекте data, вложенном в объект ответа
       }
     });
+  }
+}
+
+export const loginThunkCreator = (email, password, rememberMe) => {
+  return (dispatch) => {
+    authAPI.login(email, password, rememberMe).then(response => {
+      console.log(response.data)
+      if (response.data.resultCode === 0) {
+        dispatch(userDataThunkCreator());
+      }
+    })
+  }
+}
+
+export const logoutThunkCreator = () => {
+  return (dispatch) => {
+    authAPI.logout().then(response => {
+      console.log(response)
+      if (response.data.resultCode === 0) {
+        dispatch(userData(null, null, null, false));
+      }
+    })
   }
 }
 
