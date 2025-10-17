@@ -1,9 +1,13 @@
 import React from "react";
 import styles from "./LoginFinal.module.scss";
 import { Form, Field } from "react-final-form";
-import { composeValidators, isCheckedCheckbox, maxLengthCreator, requiredField } from "../../utils/validators";
-import { Input } from "../common/FormControls/FormControls";
+import { maxLengthHandle, requiredField, requiredFieldCheckbox } from "../../utils/validators/validators";
+import Input from "../common/formsControls/FormsControls";
 import { loginThunkCreator } from "../../redux/auth-reducer";
+import { connect } from "react-redux";
+import { Navigate } from "react-router-dom";
+
+// const maxLength10 = maxLengthHandle(10);
 
 const LoginForm = (props) => {
 // debugger
@@ -13,6 +17,7 @@ const LoginForm = (props) => {
     // form.reset();
     // alert('Все отправлено!!1')
     // Здесь будет ваша логика отправки формы
+    props.login(values.login, values.password, values.rememeberMe)
   };
   
   return (
@@ -24,8 +29,8 @@ const LoginForm = (props) => {
                   placeholder="login" 
                   name="login"
                   type="text"
-                  component={Input} 
-                  validate={composeValidators(requiredField, maxLengthCreator(30))}
+                  component={Input}
+                  validate={requiredField}
                 />
               </label>
               <label className={styles.inputWrapper}>
@@ -35,7 +40,7 @@ const LoginForm = (props) => {
                   type="password" 
                   component={Input}
                   autoComplete="current-password"
-                  validate={composeValidators(requiredField, maxLengthCreator(30))}
+                  validate={maxLengthHandle(20)}
                 />
               </label>
               <label htmlFor="checkbox" className={styles.inputCheckboxWrapper}>
@@ -44,7 +49,7 @@ const LoginForm = (props) => {
                   type="checkbox" 
                   name="rememberMe" 
                   component={Input}
-                  validate={isCheckedCheckbox("Это надо нажать")}
+                  validate={requiredFieldCheckbox}
                 /> <span>запомнить меня</span>
               </label>
               <button type="submit" disabled={submitting}>Залогиниться</button>
@@ -55,14 +60,22 @@ const LoginForm = (props) => {
 };
 
 const LoginFinal = (props) => {
+
+  if (props.isAuth) return <Navigate to={"/"} />
   return (
     <>
       <div className={styles.loginPage}>
         <h1>Login-final</h1>
-        <LoginForm />
+        <LoginForm login={props.loginThunkCreator} />
       </div>
     </>
   );
 };
 
-export default LoginFinal;
+const mapStateToProps = (state) => ({
+  isAuth: state.auth.isAuth
+})
+
+export default connect(mapStateToProps, {loginThunkCreator})(LoginFinal);//вот эта строка решила все
+
+// export default LoginFinal;

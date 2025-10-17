@@ -18,13 +18,7 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         ...action.data,
-        // isAuth: true
-        isAuth: action.data.isAuth//вместо фиксированного значения сюда приходит 0 или 1 с сервера. Если 0, то залогинен, если 1, то нет
-      }
-    case SET_LOGIN_DATA:
-      return {
-        ...state,
-        userId: action.userId
+        // isAuth: true//из-за этого тоже были проблемы
       }
     default: return state;
   }
@@ -50,37 +44,32 @@ export const userDataThunkCreator = () => {
     authAPI.getUserData().then(response => {
       if (response.data.resultCode === 0) {
         const data = response.data;
-        console.log(response.data.resultCode)
-        dispatch(userData(data.data.id, data.data.login, data.data.email, data.resultCode))//resultCode находится в объекте ответа, остальные данные находятся в объекте data, вложенном в объект ответа
+        dispatch(userData(data.data.id, data.data.login, data.data.email, true))//resultCode находится в объекте ответа, остальные данные находятся в объекте data, вложенном в объект ответа
       }
     });
   }
 }
 
-// export const loginThunkCreator = (email, password, rememberMe) => {
-//     authAPI.login(email, password, rememberMe).then(response => {
-//       console.log(response)
-//     })
-// }
-
 export const loginThunkCreator = (email, password, rememberMe) => {
+  return (dispatch) => {
     authAPI.login(email, password, rememberMe).then(response => {
-      console.log(response)
-      return (dispatch) => {
-        if (response.data.resultCode === 0) {
-          const data = response.data;
-          console.log(response.data.resultCode)
-          dispatch(userData(data.data.id, data.data.login, data.data.email, data.resultCode))//resultCode находится в объекте ответа, остальные данные находятся в объекте data, вложенном в объект ответа
-        }
+      console.log(response.data)
+      if (response.data.resultCode === 0) {
+        dispatch(userDataThunkCreator());
       }
     })
+  }
 }
 
 export const logoutThunkCreator = () => {
-  authAPI.logout().then(response => {
-    console.log(response);
-  })
-  console.log(initialState)
+  return (dispatch) => {
+    authAPI.logout().then(response => {
+      console.log(response)
+      if (response.data.resultCode === 0) {
+        dispatch(userData(null, null, null, false));
+      }
+    })
+  }
 }
 
 export default authReducer;

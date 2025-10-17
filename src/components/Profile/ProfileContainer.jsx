@@ -1,10 +1,15 @@
 import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
+<<<<<<< HEAD
 import {addPost, getStatusThunkCreator, getUserProfileThunkCreator, updateStatusThunkCreator} from "../../redux/profile-reduser";
+=======
+import { addPost, getStatusThunkCreator, getUserProfileThunkCreator, updateStatusThunkCreator} from "../../redux/profile-reduser";
+>>>>>>> fix-78
 import { useParams } from "react-router-dom";
 // import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from 'redux';
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 
 function withRouter(WrappedComponent) {
   return (props) => {//проверяем, передается ли параметр userId, и если нет, то ничего не делаем.
@@ -55,7 +60,7 @@ const mapDispatchToProps = {
 let composed = compose(
   connect(mapStateToProps, mapDispatchToProps),
   withRouter,
-  // withAuthRedirect
+  withAuthRedirect
 )
 
 // let authRedirectComponent = withAuthRedirect(ProfileContainerComponent);//withAuthRedirect находится в hoc/withAuthRedirect, это контейнерный компонент

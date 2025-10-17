@@ -32,8 +32,7 @@ const App = (props) => {
             <Route path="/Friends" element={<FriendsContainer />} />
             <Route path="/Users" element={<UsersContainer />} />
             {/* <Route path="/Login" element={<Login />} /> */}
-            {/* <Route path="/LoginFinal" element={<LoginFinal />} /> */}
-            <Route path="/LoginFinal" element={<AuthRedirectComponent />} />
+            <Route path="/LoginFinal" element={<LoginFinal />} />
           </Routes>
         </div>
       </div>
