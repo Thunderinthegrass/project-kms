@@ -22,6 +22,10 @@ form{
   justify-content: start;
   input{
     width: auto;
+    &[type="checkbox"]{
+      margin-right: 8px;
+      margin-top: 6px;
+    }
   }
 }
 input{
@@ -34,4 +38,7 @@ input{
 }
 span{
   color: #ffffff;
+}
+.errorMessage{
+  color: #ff0000;
 }
