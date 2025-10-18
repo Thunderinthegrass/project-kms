@@ -1,14 +1,15 @@
 import { authAPI } from "../api/api";
 
 const SET_USER_DATA = 'SET_USER_DATA';
-const SET_LOGIN_DATA = 'SET_LOGIN_DATA';
+const ERROR = 'ERROR';
 
 const initialState = {
   userId: null,
   login: null,
   email: null,
   // isAuth: 1,
-  isAuth: 1,
+  isAuth: false,
+  error: ''
 }
 
 const authReducer = (state = initialState, action) => {
@@ -20,15 +21,17 @@ const authReducer = (state = initialState, action) => {
         ...action.data,
         // isAuth: true//из-за этого тоже были проблемы
       }
+    case ERROR:
+      return {
+        ...state,
+        ...action.error,
+      }
     default: return state;
   }
 }
 
- const userData = (userId, login, email, isAuth) => ({type: SET_USER_DATA, data: {userId, login, email, isAuth}});
-
- const loginData = (userId) => ({type: SET_LOGIN_DATA, userId})
-
-
+export const userData = (userId, login, email, isAuth) => ({type: SET_USER_DATA, data: {userId, login, email, isAuth}});
+export const error = (error) => ({type: ERROR, error: {error}});
 
 // export const userDataThunkCreator = () => {
 //   return (dispatch) => {
@@ -56,6 +59,9 @@ export const loginThunkCreator = (email, password, rememberMe) => {
       console.log(response.data)
       if (response.data.resultCode === 0) {
         dispatch(userDataThunkCreator());
+      }
+      if (response.data.messages.length !== 0) {
+        dispatch(error(response.data.messages[0]));
       }
     })
   }

@@ -53,6 +53,7 @@ const LoginForm = (props) => {
                 /> <span>запомнить меня</span>
               </label>
               <button type="submit" disabled={submitting}>Залогиниться</button>
+              <span className={styles.errorMessage}>{props.error}</span>
             </form>
           )}
      />
@@ -66,14 +67,15 @@ const LoginFinal = (props) => {
     <>
       <div className={styles.loginPage}>
         <h1>Login-final</h1>
-        <LoginForm login={props.loginThunkCreator} />
+        <LoginForm login={props.loginThunkCreator} error={props.error} />
       </div>
     </>
   );
 };
 
 const mapStateToProps = (state) => ({
-  isAuth: state.auth.isAuth
+  isAuth: state.auth.isAuth,
+  error: state.auth.error
 })
 
 export default connect(mapStateToProps, {loginThunkCreator})(LoginFinal);//вот эта строка решила все
