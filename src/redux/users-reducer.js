@@ -33,10 +33,12 @@ let initialState = {
   currentPage: 1,
   isFetching: true,
   followingProgress: [],
+  fake: 0
 };
 
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "FAKE": return {...state, fake: state.fake + 1}
     case ADD_USERS:
       console.log(state);
       return state;

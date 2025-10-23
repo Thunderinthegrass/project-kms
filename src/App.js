@@ -29,6 +29,7 @@ componentDidMount() {
 
   render() {
 
+    console.log('перерисовка')
     if (!this.props.initialized) {
       return <Preloader />
     }

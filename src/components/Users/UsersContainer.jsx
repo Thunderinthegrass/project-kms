@@ -5,7 +5,7 @@ import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 // import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from 'redux';
-import { getCurrentPage, getFollowingProgress, getIsFetching, getPageSize, getTotalUsersCount, getUsers } from "../../redux/users-selectors";
+import { getCurrentPage, getFollowingProgress, getIsFetching, getPageSize, getTotalUsersCount, getUsers, getUsersSelector, getUsersSuperSelector } from "../../redux/users-selectors";
 
 
 class UsersContainerComponent extends React.Component {
@@ -47,8 +47,11 @@ class UsersContainerComponent extends React.Component {
 
 const mapStateToProps = (state) => {
   // debugger
+  console.log("перерисовка каждую секунду")
   return {
-    users: getUsers(state),
+    users: getUsersSuperSelector(state),//будет перерисовываться mapStateToProps, но не будет происходить перерисовкак компонента, т.к. reselect сравнивает вновь пришедшие данные с теми, что уже есть, и видит, что приходит новый массив, но с такими же данными, и не перерисовывает компонент
+    // users: getUsersSelector(state),//каждую секунду будет обновление mapStateToProps и будет происходить перерисовка, т.к. каждый раз возвращается другой массив, пусть и такой же, как и предыдущий
+    // users: getUsers(state),//будет обновление mapStateToProps каждую секунду, но не будет перерисовки, потому что не изменяется массив с данными
     pageSize: getPageSize(state),
     totalUsersCount: getTotalUsersCount(state),
     currentPage: getCurrentPage(state),

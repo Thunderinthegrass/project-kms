@@ -20,7 +20,7 @@ const Users = (props) => {
     props.addNewQuantityUsers(pageSize);//делаем переотправку, чтоб обновленные данные подтянуть
     props.addNewQuantityUsers(pageSize);//делаем переотправку, чтоб обновленные данные подтянуть
   }
-
+  console.log("компонент тоже перерисовывается")
   return <div className={s.users}>
     {
       pages.map(page => {//отрисовываем кнопки
