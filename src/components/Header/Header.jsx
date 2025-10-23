@@ -5,9 +5,9 @@ import { NavLink } from "react-router-dom";
 
 const Header = (props) => {
   // debugger;
-  const logout = () => {
-    logoutThunkCreator()
-  }
+  // const logout = () => {
+  //   logoutThunkCreator()
+  // }
   return (
     <header className={s.header}>
       <div className={s.logo}>

@@ -44,7 +44,7 @@ export const error = (error) => ({type: ERROR, error: {error}});
 
 export const userDataThunkCreator = () => {
   return (dispatch) => {
-    authAPI.getUserData().then(response => {
+    return authAPI.getUserData().then(response => {
       if (response.data.resultCode === 0) {
         const data = response.data;
         dispatch(userData(data.data.id, data.data.login, data.data.email, true))//resultCode находится в объекте ответа, остальные данные находятся в объекте data, вложенном в объект ответа

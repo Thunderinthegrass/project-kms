@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Header from './Header'
 import s from "./HeaderContainer.module.css";
-import { logoutThunkCreator, userData, userDataThunkCreator }from './../../redux/auth-reducer';
+import { logoutThunkCreator }from './../../redux/auth-reducer';
 import { connect } from 'react-redux';
 
 class HeaderContainerComponent extends Component {
@@ -13,7 +13,8 @@ class HeaderContainerComponent extends Component {
     //   // console.log(this.props.authData);
     // })
     // usersAPI.getUserData().then(data => this.props.userData(data.data.id, data.data.email, data.data.login, data.resultCode))
-    this.props.userDataThunkCreator();
+
+    // this.props.userDataThunkCreator();//теперь это находится в App
   }
 
   render() {
@@ -33,8 +34,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  userDataThunkCreator,
-  userData,
+  // userDataThunkCreator,
+  // userData,
   logoutThunkCreator
 }
 

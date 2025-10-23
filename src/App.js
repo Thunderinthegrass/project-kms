@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
@@ -13,13 +13,30 @@ import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 // import Login from "./components/Login/Login";
 import LoginFinal from "./components/LoginFinal/LoginFinal";
+import { connect } from "react-redux";
+// import { userDataThunkCreator } from "./redux/auth-reducer";
+import { initializeApp } from "./redux/app-reducer";
+import Preloader from "./components/common/Preloader/Preloader";
+// import { initialize } from "redux-form";
 // import AuthRedirectComponent from "./components/LoginFinal/LoginFinalContainer";
 
-const App = (props) => {
-  return (
+class App extends Component {
+
+componentDidMount() {
+  // this.props.userDataThunkCreator();
+  this.props.initializeApp()
+}
+
+  render() {
+
+    if (!this.props.initialized) {
+      return <Preloader />
+    }
+
+    return (
       <div className="app-wrapper">
         <HeaderContainer />
-        <Navbar state={props.state} />
+        <Navbar />
         <div className="content">
           <Routes>
             <Route path="/" element={<ProfileContainer />} />
@@ -37,6 +54,17 @@ const App = (props) => {
         </div>
       </div>
   );
+  }
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  initialized: state.app.initialized
+})
+
+const mapDispatchToProps = {
+  initializeApp,
+}
+
+const AppContainer = connect(mapStateToProps, mapDispatchToProps)(App)
+
+export default AppContainer;

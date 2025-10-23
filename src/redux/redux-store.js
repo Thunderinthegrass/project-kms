@@ -5,6 +5,7 @@ import newsReduser from "./news-reduser";
 import friendsReduser from "./friends-reduser";
 import usersReducer from "./users-reducer";
 import authReducer from "./auth-reducer";
+import appReducer from "./app-reducer";
 import {thunk} from "redux-thunk";
 // import { reducer as formReducer } from 'redux-form';
 
@@ -15,6 +16,7 @@ let reducers = combineReducers({
   friendsPage: friendsReduser,
   usersPage: usersReducer,
   auth: authReducer,
+  app: appReducer
   // form: formReducer
 });
 

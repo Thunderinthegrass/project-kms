@@ -1,11 +1,7 @@
 import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
-<<<<<<< HEAD
-import {addPost, getStatusThunkCreator, getUserProfileThunkCreator, updateStatusThunkCreator} from "../../redux/profile-reduser";
-=======
 import { addPost, getStatusThunkCreator, getUserProfileThunkCreator, updateStatusThunkCreator} from "../../redux/profile-reduser";
->>>>>>> fix-78
 import { useParams } from "react-router-dom";
 // import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from 'redux';
