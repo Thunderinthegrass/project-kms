@@ -17,6 +17,7 @@ import { connect } from "react-redux";
 // import { userDataThunkCreator } from "./redux/auth-reducer";
 import { initializeApp } from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/Preloader";
+import Arrays from "./arrays/Arrays";
 // import { initialize } from "redux-form";
 // import AuthRedirectComponent from "./components/LoginFinal/LoginFinalContainer";
 
@@ -51,6 +52,7 @@ componentDidMount() {
             <Route path="/Users" element={<UsersContainer />} />
             {/* <Route path="/Login" element={<Login />} /> */}
             <Route path="/LoginFinal" element={<LoginFinal />} />
+            <Route path="/Arrays" element={<Arrays />} />
           </Routes>
         </div>
       </div>
