@@ -3,7 +3,8 @@ import s from "./ProfileInfo.module.css";
 import leopold from "../../../assets/leopold.jpg";
 import Preloader from "../../common/Preloader/Preloader";
 import ProfileStatusClass from "./ProfileStatus/ProfileStatusClass";
-// import ProfileStatus from "./ProfileStatus/ProfileStatus";
+import ProfileStatus from "./ProfileStatus/ProfileStatus";
+import ProfileStatustrenirovka from "./ProfileStatus/ProfileStatustrenirovka";
 
 const ProfileInfo = (props) => {
   // debugger
@@ -21,8 +22,9 @@ const ProfileInfo = (props) => {
         </div>
         <div className={s.userName}>
           <p>{props.userData.fullName}</p>
-          <ProfileStatusClass status={props.status} updateStatus={props.updateStatus} />
-          {/* <ProfileStatus status={props.status} updateStatus={props.updateStatus} /> */}
+          {/* <ProfileStatusClass status={props.status} updateStatus={props.updateStatus} /> */}
+          <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
+          {/* <ProfileStatustrenirovka status={props.status} updateStatus={props.updateStatus} /> */}
         </div>
       </div>
   )

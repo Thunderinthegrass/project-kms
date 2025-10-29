@@ -23,7 +23,8 @@ class ProfileContainerComponent extends React.Component {
       // this.props.getUserProfileThunkCreator(this.props.match.params.userId);
     this.props.getUserProfileThunkCreator(this.props.match.params.userId);
     // }//17.09.2025 закомментировал эту проверку. Зачем - см. в тетрадке
-    this.props.getStatusThunkCreator(this.props.match.params.userId, this.props.auth);
+    // this.props.getStatusThunkCreator(this.props.match.params.userId, this.props.auth);
+    this.props.getStatusThunkCreator(this.props.match.params.userId);//из верхней строки убрал вроде бы ненужный параметр this.props.auth
   }
 
   render() {
