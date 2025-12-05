@@ -1,3 +1,6 @@
+.arraysWrapper{
+  padding: 15px;
+}
 .info{
   max-width: 1140px;
   width: 100%;
@@ -7,7 +10,28 @@
 }
 button{
   transition: .3s;
+  position: relative;
 }
 .active{
   background: #6c0775;
+}
+.buttonsContainer{
+  display: flex;
+  gap: 15px;
+  padding: 10px;
+}
+.tooltip{
+  color: transparent;
+  background-color: transparent;
+  transition: color, background-color .5s;
+  &.tooltipActive{
+  position: absolute;
+  display: block;
+  background-color: #e2df08;
+  color: #b10404;
+  right: calc(-100% + -5px);
+  top: -100%;
+  padding: 8px;
+  white-space: nowrap;
+}
 }
