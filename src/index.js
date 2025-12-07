@@ -17,12 +17,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
   root.render(
     <React.StrictMode>
       <BrowserRouter>
-        <Provider store={reduxStore}>
+        {/* <Provider store={reduxStore}>
           <App />
-        </Provider>
-        {/* <Provider store={store}>
-          <AppToolkit />
         </Provider> */}
+        <Provider store={store}>
+          <AppToolkit />
+        </Provider>
       </BrowserRouter>
     </React.StrictMode>
   );

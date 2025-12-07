@@ -53,7 +53,7 @@ const profileReducer = (state = initialState, action) => {
 export const getUserProfileThunkCreator = (userId = 32562) => {//если id не передается, то он равен 32562
   return (dispatch) => {
     usersAPI.getUserProfile(userId).then((response) => {//если передается, то отправляем запрос и отрисовываем нужного пользователя
-  
+          
           dispatch(setUserProfile(response.data));
         })
   }

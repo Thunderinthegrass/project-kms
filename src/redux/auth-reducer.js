@@ -56,7 +56,7 @@ export const userDataThunkCreator = () => {
 export const loginThunkCreator = (email, password, rememberMe) => {
   return (dispatch) => {
     authAPI.login(email, password, rememberMe).then(response => {
-      console.log(response.data)
+      console.log("данные из loginThunkCreator", response.data)
       if (response.data.resultCode === 0) {
         dispatch(userDataThunkCreator());
       }
@@ -74,6 +74,7 @@ export const logoutThunkCreator = () => {
       if (response.data.resultCode === 0) {
         dispatch(userData(null, null, null, false));
       }
+      console.log(response)
     })
   }
 }
